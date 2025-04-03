@@ -11,11 +11,17 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding: 1rem;
+    margin: 1rem;
     border: solid 2px red;
 }
 
 .film__cover{
     height: 14rem;
+}
+
+.film__caption{
+    margin-top: 0.5rem;
 }
 
 .film__title{
