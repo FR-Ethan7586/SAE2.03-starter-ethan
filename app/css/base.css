@@ -4,4 +4,6 @@
 @import "./variables.css" layer(variables);
 @import "./utilities.css" layer(utilities);
 
+@import "../component/Films_list/style.css" layer(components);
+
 @import "../component/NavBar/style.css" layer(components);
