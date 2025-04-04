@@ -4,13 +4,13 @@
     <input
       required
       type="text"
-      name="nom_film"
+      name="name"
       placeholder="Saisir le nom du film"
     />
     <input
       required
       type="text"
-      name="realisateur"
+      name="director"
       placeholder="Saisir un realisateur"
       pattern="[^0-9]*"
       title="Numbers are not allowed"
@@ -18,13 +18,13 @@
     <input
       required
       type="number"
-      name="annee"
+      name="year"
       placeholder="Saisir une année de sortie"
     />
     <input
       required
       type="number"
-      name="Duree"
+      name="length"
       placeholder="Saisir la durée du film"
     />
     <div>
@@ -34,14 +34,8 @@
         name="description"
         placeholder="Saisir la description du film"
       />
-      <input
-        required
-        type="text"
-        name="description"
-        placeholder="Saisir la description du film"
-      />
     </div>
-    <select name="Categorie">
+    <select name="Category">
       <option value="Action">Action</option>
       <option value="Animation">Animation</option>
       <option value="Aventure">Aventure</option>
@@ -56,7 +50,7 @@
     <input
       required
       type="number"
-      name="Age"
+      name="min_age"
       placeholder="Saisir l'age minimum"
     />
     <input
@@ -72,6 +66,6 @@
       placeholder="Saisir le lien vers la bande annonce"
     />
 
-    <input onclick="{{handler}}" type="button" value="Update" name="todo" />
+    <input onclick="{{handler}}" type="button" value="UpdateMovie" name="todo" />
   </form>
 </div>

@@ -66,9 +66,9 @@ function updateMenu($n, $d, $y, $l, $de, $c, $a, $i, $t)
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     // Requête SQL de mise à jour du menu avec des paramètres
-    $sql = "UPDATE Movie SET name = :name, director = :director, year = :year, length = :length,
-            description = :description, category = :category, age = :age, image = :image,
-            trailer = :trailer WHERE id = :id";
+    $sql = "UPDATE 'Movie' SET 'name' = :name, 'director' = :director, 'year' = :year, 'length' = :length,
+            'description' = :description, 'category' = :category, 'age' = :age, 'image' = :image,
+            'trailer' = :trailer";
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
     // Lie les paramètres aux valeurs
