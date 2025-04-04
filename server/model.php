@@ -21,23 +21,19 @@ define("DBPWD", "lochis1");
 
 // essai de connexion à la base de données pour recup les films
 /**
-* Récupère le menu pour un jour spécifique dans la base de données.
+* Récupère le Movie pour un jour spécifique dans la base de données.
 * @param string $c Limage du film qu'on recup.
 * @param string $t Le titre du film qu'on recup.
 * @return array Un tableau d'objets contenant l'image et le titre du film.
  */
-function getMenu($j, $w)
+function getMovie()
 {
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
-    // Requête SQL pour récupérer le menu avec des paramètres
-    $sql = "select entree, plat, dessert from Repas where jour=:jour and semaine=:semaine";
+    // Requête SQL pour récupérer le Movie avec des paramètres
+    $sql = "SELECT * FROM Movie";
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
-    // Lie le paramètre à la valeur
-    $stmt->bindParam(':semaine', $w);
-    $stmt->bindParam(':jour', $j);
-
     // Exécute la requête SQL
     $stmt->execute();
     // Récupère les résultats de la requête sous forme d'objets
