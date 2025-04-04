@@ -1,23 +1,33 @@
-.films__list{
+#Movies__list {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
     flex-direction: row;
-    /* rendre scoll horrizontal */
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    padding-left: 30rem;
+
 }
 
 .film__card{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     flex-direction: column;
     padding: 1rem;
     margin: 1rem;
-    border: solid 2px red;
+    background-color: var(--color-bg-card);
+    border-radius: 10px;
 }
 
 .film__cover{
     height: 14rem;
+    width: 10.5rem;
+    border-radius: 10px;
 }
 
 .film__caption{

@@ -55,7 +55,7 @@
 
       C.getMovies = async function () {
         let data = await DataMovie.request();
-        if (data === undefined) {
+        if (data === undefined || data === 0) {
           alert("Erreur de chargement des films.");
           return;
         }

@@ -8,15 +8,29 @@
   </head>
   <body>
     <section id="log"></section>
+    <section id="addMovie__form"></section>
 
     <script type="module">
       import { Log } from "./component/Log/script.js";
+      import { DataMovie } from "./data/dataMovie.js";
+      import { MovieForm } from "./component/MovieForm/script.js";
 
       window.C = {};
 
       C.start = function () {
         V.renderLog("Démarrage de l'application");
+        V.renderMovie("C.handlerUpdate()");
       };
+
+      C.handlerUpdate = async function(){
+            
+            let form = document.querySelector('#addMovie__form');
+            let fd = new FormData(form);
+            // Attend la réponse de la fonction `DataMenu.update(fd)`
+            let res = await DataMovie.update(fd);
+            // Affiche le résultat de la mise à jour dans le journal
+            V.renderLog(res);
+        }
 
       window.V = {};
 
@@ -24,6 +38,11 @@
         let content = document.querySelector("#log");
         content.innerHTML = Log.format(txt);
       };
+
+      V.renderMovie = function(handler){
+            let content = document.querySelector('#addMovie__form');
+            content.innerHTML = MovieForm.format(handler);
+        }
 
       C.start();
     </script>
