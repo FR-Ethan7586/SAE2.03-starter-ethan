@@ -50,7 +50,17 @@
       };
       V.renderMoviesList = function (obj) {
         let test = document.querySelector("#Movies__list");
-        test.innerHTML = Movie.format(obj);
+        test.innerHTML = Movie.formatMany(obj);
+      };
+
+      C.getMovies = async function () {
+        let data = await DataMovie.request();
+        if (data === undefined) {
+          alert("Erreur de chargement des films.");
+          return;
+        }
+        
+        V.renderMoviesList(data);
       };
 
       C.start(); // Démarre l'application
