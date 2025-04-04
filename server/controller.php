@@ -22,7 +22,7 @@ require("model.php");
 
 
 function readController(){
-    $film_list = getALLFilm();
+    $film_list = getMovie();
     return $film_list;
 }
 
