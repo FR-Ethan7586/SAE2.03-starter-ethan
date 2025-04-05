@@ -38,7 +38,7 @@ function updateController()
   $duree = $_REQUEST['length'];
   $desc = $_REQUEST['description'];
   $cat = $_REQUEST['category'];
-  $age = $_REQUEST['age'];
+  $age = $_REQUEST['min_age'];
   $img = $_REQUEST['image'];
   $trailer = $_REQUEST['trailer'];
   // Mise à jour du Movie à l'aide de la fonction updateMovie décrite dans model.php

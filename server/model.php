@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Ce fichier contient toutes les fonctions qui réalisent des opérations
  * sur la base de données, telles que les requêtes SQL pour insérer, 
@@ -21,10 +22,10 @@ define("DBPWD", "lochis1");
 
 // essai de connexion à la base de données pour recup les films
 /**
-* Récupère le Movie pour un jour spécifique dans la base de données.
-* @param string $c Limage du film qu'on recup.
-* @param string $t Le titre du film qu'on recup.
-* @return array Un tableau d'objets contenant l'image et le titre du film.
+ * Récupère le Movie pour un jour spécifique dans la base de données.
+ * @param string $c Limage du film qu'on recup.
+ * @param string $t Le titre du film qu'on recup.
+ * @return array Un tableau d'objets contenant l'image et le titre du film.
  */
 function getMovie()
 {
@@ -66,11 +67,13 @@ function updateMovie($n, $d, $y, $l, $de, $c, $a, $i, $t)
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     // Requête SQL de mise à jour du menu avec des paramètres
-    $sql = "UPDATE 'Movie' SET 'name' = :name, 'director' = :director, 'year' = :year, 'length' = :length,
-            'description' = :description, 'category' = :category, 'age' = :age, 'image' = :image,
-            'trailer' = :trailer";
+    // Requête SQL d'ajout d'un film
+    $sql = "INSERT INTO `Movie` (`name`, `director`, `year`, `length`, `description`, `category`, `age`, `image`, `trailer`)
+            VALUES (:name, :director, :year, :length, :description, :category, :age, :image, :trailer)";
+
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
+
     // Lie les paramètres aux valeurs
     $stmt->bindParam(':name', $n);
     $stmt->bindParam(':director', $d);
@@ -81,6 +84,7 @@ function updateMovie($n, $d, $y, $l, $de, $c, $a, $i, $t)
     $stmt->bindParam(':age', $a);
     $stmt->bindParam(':image', $i);
     $stmt->bindParam(':trailer', $t);
+
     // Exécute la requête SQL
     $stmt->execute();
     // Récupère le nombre de lignes affectées par la requête
