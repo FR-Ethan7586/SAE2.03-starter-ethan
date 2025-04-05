@@ -5,3 +5,20 @@
 @import "./utilities.css" layer(utilities);
 
 @import "../component/Log/style.css" layer(components);
+@import "../component/MovieForm/style.css" layer(components);
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    background-color: var(--color-bg);
+}
+
+.admin__title{
+    margin: 3rem 0 0 0;
+    text-align: center;
+    font-family: var(--ff-sans);
+    color: white;
+}

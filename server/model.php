@@ -61,7 +61,7 @@ function getMovie()
  * Si la requête a réussi, le nombre de lignes affectées sera 1.
  * Si la requête a échoué, le nombre de lignes affectées sera 0.
  */
-function updateMenu($n, $d, $y, $l, $de, $c, $a, $i, $t)
+function updateMovie($n, $d, $y, $l, $de, $c, $a, $i, $t)
 {
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
