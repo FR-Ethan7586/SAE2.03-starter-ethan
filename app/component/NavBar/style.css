@@ -4,7 +4,7 @@
   align-items: center;
   padding: 1rem 3rem;
   color: var(--color-fg);
-  background-color: var(--color-bg);
+  background-color: var(--color-bg-nav);
 
   .navbar__item {
     --_offset: 0.2rem;
@@ -18,4 +18,18 @@
       --_offset: 0.5rem;
     }
   }
+}
+
+.navbar__logo{
+  height: 4rem;
+  width: 4rem;
+  flex-shrink: 0;
+}
+
+.navbar__list{
+  display: flex;
+}
+
+li{
+    list-style: none;
 }

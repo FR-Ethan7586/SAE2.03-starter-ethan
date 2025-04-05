@@ -1,15 +1,27 @@
 #Movies__list {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-shrink: 0;
     flex-direction: row;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
     scroll-behavior: smooth;
-    padding-left: 30rem;
+    scrollbar-width: thin;
+}
 
+#Movies__list::-webkit-scrollbar-thumb {
+    background: #346abf;
+    border-radius: 8px;
+    border-top: 1px white solid;
+    box-shadow: 0 2px 3px 1px rgba(0,0,0,.45), inset 0 0 5px 2px rgba(255,255,255,.4);
+  }
+
+.title__1{
+    margin: 1rem 1rem 0 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: var(--ff-sans);
+    color: var(--color-text);
 }
 
 .film__card{
@@ -20,6 +32,8 @@
     flex-direction: column;
     padding: 1rem;
     margin: 1rem;
+    max-width: 12.5rem;
+    max-height: 19.8rem;
     background-color: var(--color-bg-card);
     border-radius: 10px;
 }
@@ -32,10 +46,18 @@
 
 .film__caption{
     margin-top: 0.5rem;
+    text-align: center;
 }
 
 .film__title{
     font-size: 1rem;
     font-weight: 500;
     font-family: var(--ff-sans);
+}
+
+@media (min-width: 30rem) {
+    #Movies__list {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-gray) var(--color-bg);
+    }
 }

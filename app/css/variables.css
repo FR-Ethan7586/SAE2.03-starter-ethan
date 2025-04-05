@@ -16,6 +16,8 @@
 
   /* Sementic Tokens */
   --color-fg: var(--color-white);
-  --color-bg: var(--color-gray-dark);
+  --color-bg-nav: var(--color-ultra-violet);
   --color-bg-card: var(--color-thistle);
+  --color-bg: var(--color-space-cadet);
+  --color-text: var(--color-white);
 }
