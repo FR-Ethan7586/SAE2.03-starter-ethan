@@ -42,6 +42,29 @@ function getMovie()
     return $res; // Retourne les résultats
 }
 
+function getMovieDetail($id)
+{
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL pour récupérer le Movie avec des paramètres
+    // $sql = "SELECT * FROM Movie WHERE id = :id";
+
+    $sql = "SELECT Movie.id, Movie.name, Movie.year, Movie.length, Movie.description, Movie.director, Movie.image, Movie.trailer, Movie.min_age, Category.name AS category 
+    FROM Movie 
+    INNER JOIN Category ON Movie.id_category = Category.id
+    WHERE Movie.id = :id";
+
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+
+    $stmt->bindParam(':id', $id);
+    // Exécute la requête SQL
+    $stmt->execute();
+    // Récupère les résultats de la requête sous forme d'objets
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; // Retourne les résultats
+}
+
 
 /**
  * Met à jour le menu pour un jour spécifique dans la base de données.
@@ -88,5 +111,6 @@ function updateMovie($n, $d, $y, $l, $de, $c, $a, $i, $t)
     // Exécute la requête SQL
     $stmt->execute();
     // Récupère le nombre de lignes affectées par la requête
-    return ($stmt->rowCount());
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; // Retourne les résultats
 }

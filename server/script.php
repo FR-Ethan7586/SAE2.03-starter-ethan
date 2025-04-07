@@ -1,4 +1,5 @@
 <?php
+
 /** ARCHITECTURE PHP SERVEUR : Rôle du fichier script.php
  * 
  * Ce fichier est celui à qui on adresse toutes les requêtes HTTP.
@@ -31,7 +32,7 @@ require("controller.php");
  * via une requête HTTP. 
  * Si ce paramètre est présent, le code à l'intérieur du bloc conditionnel sera exécuté.
  */
-if ( isset($_REQUEST['todo']) ){
+if (isset($_REQUEST['todo'])) {
 
   /**
    * La fonction PHP header permet de définir l'en-tête HTTP de la réponse.
@@ -50,15 +51,19 @@ if ( isset($_REQUEST['todo']) ){
 
   // en fonction de la valeur de 'todo', on appelle la fonction de contrôle appropriée
   // peut s'écrire aussi avec des if/else
-  switch($todo){
+  switch ($todo) {
 
     case 'readMovies':
       $data = readMoviesController();
       break;
 
-      case 'updateMovie':
-        $data = updateController();
-        break;
+    case 'updateMovie':
+      $data = updateController();
+      break;
+
+    case 'readMovie':
+      $data = readMovieDetailController();
+      break;
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée
       echo json_encode('[error] Unknown todo value');
@@ -75,9 +80,10 @@ if ( isset($_REQUEST['todo']) ){
    * Si la fonction de contrôleur retourne false, on renvoie une réponse JSON avec un message d'erreur 
    * et un code de réponse HTTP 500 (Internal error), puis termine l'exécution du script (exit()).
    */
-  if ($data===false){
+  if ($data === false) {
     echo json_encode('[error] Controller returns false');
     http_response_code(500); // 500 == "Internal error"
+
     exit();
   }
 
@@ -89,8 +95,6 @@ if ( isset($_REQUEST['todo']) ){
   echo json_encode($data);
   http_response_code(200); // 200 == "OK"
   exit();
-
-   
 } // fin de if ( isset($_REQUEST['todo']) )
 
 
@@ -101,7 +105,3 @@ if ( isset($_REQUEST['todo']) ){
  * HTTP 404 (Not found), indiquant que la requête HTTP ne correspond à rien.
  */
 http_response_code(404); // 404 == "Not found"
-
-
-
-?>

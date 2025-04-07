@@ -26,6 +26,11 @@ function readMoviesController(){
     return $film_list;
 }
 
+function readMovieDetailController(){
+ $film_detail = getMovieDetail($_REQUEST['id']);
+return $film_detail;
+}
+
 function updateController()
 {
   /* Lecture des données de formulaire
@@ -41,6 +46,9 @@ function updateController()
   $age = $_REQUEST['min_age'];
   $img = $_REQUEST['image'];
   $trailer = $_REQUEST['trailer'];
+  // Vérification des données obligatoires
+
+
   // Mise à jour du Movie à l'aide de la fonction updateMovie décrite dans model.php
   $ok = updateMovie($nom, $rea, $annee, $duree, $desc, $cat, $age, $img, $trailer);
   // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)

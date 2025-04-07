@@ -18,7 +18,7 @@
 
 // export { DataMovie };
 
-let HOST_URL = "https://mmi.unilim.fr/~lochis1"; // CHANGE THIS TO MATCH YOUR CONFIG
+let HOST_URL = ".."; // CHANGE THIS TO MATCH YOUR CONFIG
 
 let DataMovie = {};
 
@@ -30,14 +30,11 @@ DataMovie.add = async function(fdata) {
     // Convertir l'objet de données en JSON
     let config = {
         method: "POST", // méthode HTTP à utiliser
-        headers: {
-            'Content-Type': 'application/json' // Indiquer que les données sont en JSON
-        },
-        body: JSON.stringify(fdata) // Convertir l'objet en chaîne JSON
+        body: fdata
     };
 
     // Effectuer la requête
-    let answer = await fetch(HOST_URL + "/SAE2.03-starter-ethan/server/script.php?todo=updateMovie", config);
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=updateMovie", config);
     
     // Vérifier si la requête a bien fonctionné
     if (!answer.ok) {
