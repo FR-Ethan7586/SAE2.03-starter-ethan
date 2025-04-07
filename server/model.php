@@ -107,7 +107,6 @@ function updateMovie($n, $d, $y, $l, $de, $c, $a, $i, $t)
     $stmt->bindParam(':age', $a);
     $stmt->bindParam(':image', $i);
     $stmt->bindParam(':trailer', $t);
-  var_dump($sql);
     // Exécute la requête SQL
     $stmt->execute();
     // Récupère le nombre de lignes affectées par la requête

@@ -5,14 +5,14 @@
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  height: 45rem;
   width: 20rem;
   padding: 1rem;
   font-family: var(--ff-sans);
   border-radius: 10px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   color: var(--color-fg);
   background-color: var(--color-bg-nav);
-  border: solid 2px rgb(0, 255, 55);
+  border: solid 1px grey;
 
   .movie__info__title {
     position: relative;
@@ -36,6 +36,7 @@
   }
 
   .movie__info__cover {
+    justify-self: center;
     height: 21rem;
     width: 15.5rem;
     margin-bottom: 1rem;
@@ -48,7 +49,6 @@
 
 @media (min-width: 570px) {
   #Movie__detail {
-    height: 45rem;
     width: 30rem;
     padding: 2rem;
   }
@@ -65,7 +65,6 @@
 
 @media (min-width: 1200px) {
   #Movie__detail {
-    height: 50rem;
     width: 45rem;
     padding: 2rem;
   }
