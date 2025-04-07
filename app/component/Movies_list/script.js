@@ -20,4 +20,17 @@ Movie.formatMany = function (Movies) {
   return html;
 };
 
+// let togg2 = document.getElementByClass("film__cover");
+// let d2 = document.getElementById("Movie__detail");
+
+// function togg(){
+//   if(getComputedStyle(d2).visibility !== "hidden"){
+//     d2.style.visibility = "hidden"; // Cache Movie__detail
+//   } else {
+//     d2.style.visibility = "visible"; // Affiche Movie__detail
+//   }
+// };
+
+// togg2.onclick = togg;
+
 export { Movie };

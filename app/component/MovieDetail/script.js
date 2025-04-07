@@ -25,4 +25,15 @@ MovieDetail.formatMany = function (MovieDetails) {
   return html;
 };
 
+// document.getElementById('div1').addEventListener('click', function() {
+//   var div2 = document.getElementById('div2');
+//   // Vérification de l'état actuel de div2
+//   if (div2.style.display === 'none' || div2.style.display === '') {
+//       div2.style.display = 'block'; // Afficher div2
+//   } else {
+//       div2.style.display = 'none'; // Masquer div2
+//   }
+// });
+
+
 export { MovieDetail };

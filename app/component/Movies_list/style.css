@@ -24,7 +24,8 @@
     color: var(--color-text);
 }
 
-.film__card{
+#film__card{
+    display: block;
     display: flex;
     align-items: center;
     justify-content: center;

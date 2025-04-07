@@ -5,8 +5,8 @@
 @import "./utilities.css" layer(utilities);
 
 @import "../component/Movies_list/style.css" layer(components);
-
 @import "../component/NavBar/style.css" layer(components);
+@import "../component/MovieDetail/style.css" layer(components);
 
 body{
     background-color: var(--color-bg);

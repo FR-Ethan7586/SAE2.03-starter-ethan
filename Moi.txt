@@ -1,0 +1,1 @@
+Pour MovieDetail Lorsque card est clique il apparait des que on clique a l'exterieur il disparait aussi Home renvoie en a Nos Films

@@ -42,7 +42,7 @@ function updateController()
   $annee = $_REQUEST['year'];
   $duree = $_REQUEST['length'];
   $desc = $_REQUEST['description'];
-  $cat = $_REQUEST['category'];
+  $cat = $_REQUEST['id_category'];
   $age = $_REQUEST['min_age'];
   $img = $_REQUEST['image'];
   $trailer = $_REQUEST['trailer'];

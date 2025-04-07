@@ -13,7 +13,7 @@
     <section id="content">
       <h2 class="title__1">Nos Films</h2>
       <div id="Movies__list"></div>
-      <div class="Movie__detail"></div>
+      <div id="Movie__detail" style="display: none"></div>
     </section>
 
     <script type="module">
@@ -21,9 +21,7 @@
       import { Movie } from "./component/Movies_list/script.js";
       import { MovieDetail } from "./component/MovieDetail/script.js";
       import { DataMovie } from "./data/dataMovie.js";
-      // Controleur
-      // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
-      // Une fois l'application terminée, on pourrait remettre let C.
+
       window.C = {};
 
       C.handlerAbout = function () {
@@ -33,36 +31,43 @@
       };
 
       C.handlerDetail = async function (id) {
-  let data = await DataMovie.requestMovieDetails(id);
-  if (!data || data.length === 0) {
-    alert("Erreur de chargement des détails du film.");
-    return;
-  }
+        let data = await DataMovie.requestMovieDetails(id);
+        if (!data || data.length === 0) {
+          alert("Erreur de chargement des détails du film.");
+          return;
+        }
 
-  console.log("Film reçu :", data[0]); // Pour vérifier
+        console.log("Film reçu :", data[0]); // Pour vérifier
 
-  let detailDiv = document.querySelector(".Movie__detail");
-  detailDiv.innerHTML = MovieDetail.format(data[0]);
-};
+        let detailDiv = document.querySelector("#Movie__detail");
+        detailDiv.innerHTML = MovieDetail.format(data[0]);
+        detailDiv.style.display = "block"; // Show the detail section
+      };
 
       C.start = function () {
         V.renderNavBar("C.handlerAbout()");
         C.getMovies();
       };
 
-
-      // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
-
-
 
       V.renderNavBar = function (hAbout) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(hAbout);
       };
+
       V.renderMoviesList = function (obj) {
         let test = document.querySelector("#Movies__list");
         test.innerHTML = Movie.formatMany(obj);
+
+        // Add click event listeners to film cards
+        let filmCards = test.querySelectorAll(".film__card");
+        filmCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            let movieId = card.getAttribute("data-id");
+            C.handlerDetail(movieId);
+          });
+        });
       };
 
       C.getMovies = async function () {
@@ -75,8 +80,30 @@
         V.renderMoviesList(data);
       };
 
+      // Hide #Movie__detail when clicking outside of it
+      document.addEventListener("click", (event) => {
+        let detailDiv = document.querySelector("#Movie__detail");
+        if (
+          !detailDiv.contains(event.target) &&
+          !event.target.classList.contains("film__card")
+        ) {
+          detailDiv.style.display = "none";
+        }
+      });
+
+      // Sélectionner le bouton et l'élément cible
+      document.getElementById("Home__btn");
+      document.addEventListener("click", function () {
+        // Sélectionner l'élément avec la classe .title__1
+        const targetElement = document.querySelector(".title__1");
+
+        // Vérifier si l'élément existe avant de scroller
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+
       C.start(); // Démarre l'application
     </script>
   </body>
 </html>
-<script type="module"></script>

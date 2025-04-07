@@ -91,8 +91,8 @@ function updateMovie($n, $d, $y, $l, $de, $c, $a, $i, $t)
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     // Requête SQL de mise à jour du menu avec des paramètres
     // Requête SQL d'ajout d'un film
-    $sql = "INSERT INTO `Movie` (`name`, `director`, `year`, `length`, `description`, `category`, `age`, `image`, `trailer`)
-            VALUES (:name, :director, :year, :length, :description, :category, :age, :image, :trailer)";
+    $sql = "INSERT INTO `Movie` (`name`, `director`, `year`, `length`, `description`, `id_category`, `min_age`, `image`, `trailer`)
+            VALUES (:name, :director, :year, :length, :description, :id_category, :age, :image, :trailer)";
 
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
@@ -103,14 +103,14 @@ function updateMovie($n, $d, $y, $l, $de, $c, $a, $i, $t)
     $stmt->bindParam(':year', $y);
     $stmt->bindParam(':length', $l);
     $stmt->bindParam(':description', $de);
-    $stmt->bindParam(':category', $c);
+    $stmt->bindParam(':id_category', $c);
     $stmt->bindParam(':age', $a);
     $stmt->bindParam(':image', $i);
     $stmt->bindParam(':trailer', $t);
-
+  var_dump($sql);
     // Exécute la requête SQL
     $stmt->execute();
     // Récupère le nombre de lignes affectées par la requête
-    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    $res = $stmt->rowCount();
     return $res; // Retourne les résultats
 }
