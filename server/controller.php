@@ -21,14 +21,16 @@
 require("model.php");
 
 
-function readMoviesController(){
-    $film_list = getMovie();
-    return $film_list;
+function readMoviesController()
+{
+  $film_list = getMovie();
+  return $film_list;
 }
 
-function readMovieDetailController(){
- $film_detail = getMovieDetail($_REQUEST['id']);
-return $film_detail;
+function readMovieDetailController()
+{
+  $film_detail = getMovieDetail($_REQUEST['id']);
+  return $film_detail;
 }
 
 function updateController()
@@ -62,7 +64,8 @@ function updateController()
 
 //  ------------------ Itération 4 ------------------
 
-function readMoviesPerCategorieController(){
+function readMoviesPerCategorieController()
+{
   $film_list_cat = getMoviePerCategorie($_REQUEST['category']);
   return $film_list_cat;
 }
@@ -70,7 +73,8 @@ function readMoviesPerCategorieController(){
 
 // --------------------Itération 5 --------------------//
 
-function updateProfilController(){
+function updateProfilController()
+{
   /* Lecture des données de formulaire
     On ne vérifie pas si les données sont valides, on suppose (faudra pas toujours...) que le client les a déjà
     vérifiées avant de les envoyer 
@@ -90,5 +94,11 @@ function updateProfilController(){
   } else {
     return false;
   }
+}
+//------------itération 6 ------------------//
 
+function readProfilController()
+{
+  $profil = getProfil();
+  return $profil;
 }

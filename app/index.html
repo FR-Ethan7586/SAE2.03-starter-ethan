@@ -44,6 +44,7 @@
       import { MovieCat } from "./component/Movies_list_Cat/script.js";
       import { MovieDetail } from "./component/MovieDetail/script.js";
       import { DataMovie } from "./data/dataMovie.js";
+      import { DataProfil } from "./data/dataProfil.js";
 
       window.C = {};
 
@@ -98,6 +99,14 @@
         });
       };
 
+      C.getProfil = async function () {
+        let data = await DataProfil.request();
+        if (data === undefined || data === 0) {
+          alert("Erreur de chargement du profil.");
+          return;
+        }
+      };
+
       C.start = function () {
         V.renderNavBar("C.handlerAbout()");
         C.getMovies();
@@ -111,6 +120,7 @@
         C.getMoviesCat("Aventure");
         C.getMoviesCat("Fantaisie");
         C.getMoviesCat("Documentaire");
+        C.getProfil();
         
       };
 

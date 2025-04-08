@@ -33,4 +33,3 @@ DataMovie.requestCat = async function (cat) {
 
 export { DataMovie };
 
-

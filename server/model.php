@@ -162,3 +162,22 @@ function updateProfil($nom, $age, $img)
     $res = $stmt->rowCount();
     return $res; // Retourne les résultats
 }
+
+// --------------------Itération 6 --------------------//
+
+function getProfil()
+{
+
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL pour récupérer le Movie avec des paramètres
+    $sql = "SELECT * FROM Profil";
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+    // Exécute la requête SQL
+    $stmt->execute();
+    // Récupère les résultats de la requête sous forme d'objets
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; // Retourne les résultats
+
+}
