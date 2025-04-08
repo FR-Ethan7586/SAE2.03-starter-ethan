@@ -138,3 +138,27 @@ function getMoviePerCategorie($cat)
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res; // Retourne les résultats
 }
+
+
+function updateProfil($nom, $age, $img)
+{
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL de mise à jour du menu avec des paramètres
+    // Requête SQL d'ajout d'un film
+    $sql = "INSERT INTO `Profil` (`name`, `age`, `image` )
+            VALUES (:name, :age, :image)";
+
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+
+    // Lie les paramètres aux valeurs
+    $stmt->bindParam(':name', $nom);
+    $stmt->bindParam(':age', $age);
+    $stmt->bindParam(':image', $img);
+    // Exécute la requête SQL
+    $stmt->execute();
+    // Récupère le nombre de lignes affectées par la requête
+    $res = $stmt->rowCount();
+    return $res; // Retourne les résultats
+}

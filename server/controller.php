@@ -66,3 +66,29 @@ function readMoviesPerCategorieController(){
   $film_list_cat = getMoviePerCategorie($_REQUEST['category']);
   return $film_list_cat;
 }
+
+
+// --------------------Itération 5 --------------------//
+
+function updateProfilController(){
+  /* Lecture des données de formulaire
+    On ne vérifie pas si les données sont valides, on suppose (faudra pas toujours...) que le client les a déjà
+    vérifiées avant de les envoyer 
+  */
+  $nom = $_REQUEST['ProfilName'];
+  $img = $_REQUEST['ProfilImage'];
+  $age = $_REQUEST['ProfilAge'];
+
+  // Vérification des données obligatoires
+
+
+  // Mise à jour du Movie à l'aide de la fonction updateMovie décrite dans model.php
+  $ok = updateProfil($nom, $age, $img);
+  // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
+  if ($ok != 0) {
+    return "Le profil $nom a été ajouté avec succès !";
+  } else {
+    return false;
+  }
+
+}

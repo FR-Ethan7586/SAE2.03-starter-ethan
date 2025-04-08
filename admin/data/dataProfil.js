@@ -1,13 +1,8 @@
 let HOST_URL = ".."; // CHANGE THIS TO MATCH YOUR CONFIG
 
-let DataMovie = {};
+let DataProfil = {};
 
-/**
- * @param {*} fdata un objet contenant les données du formulaire à envoyer au serveur.
- * @returns la réponse du serveur.
- */
-DataMovie.add = async function (fdata) {
-  // Convertir l'objet de données en JSON
+DataProfil.add = async function (fdata) {
   let config = {
     method: "POST", // méthode HTTP à utiliser
     body: fdata,
@@ -15,9 +10,7 @@ DataMovie.add = async function (fdata) {
 
   // Effectuer la requête
   let answer = await fetch(
-    HOST_URL + "/server/script.php?todo=updateMovie",
-    config
-  );
+    HOST_URL + "/server/script.php?todo=updateProfil", config );
 
   // Vérifier si la requête a bien fonctionné
   if (!answer.ok) {
@@ -31,4 +24,4 @@ DataMovie.add = async function (fdata) {
   return data;
 };
 
-export { DataMovie };
+export { DataProfil };
