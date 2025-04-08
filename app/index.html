@@ -11,14 +11,37 @@
     <header id="header"></header>
 
     <section id="content">
-      <h2 class="title__1">Nos Films</h2>
-      <div id="Movies__list"></div>
+      <h2 class="title--1">Tout Nos Films</h2>
+      <div class="Movie__list" id="Movies__list"></div>
       <div id="Movie__detail" style="display: none"></div>
+      <h2 class="title">Nos Films D'Action</h2>
+      <div class="Movie__list" id="Movies__Action"></div>
+      <h2 class="title">Nos Films Comique</h2>
+      <div class="Movie__list" id="Movies__Comedie"></div>
+      <h2 class="title">Nos Films Dramatique</h2>
+      <div class="Movie__list" id="Movies__Drame"></div>
+      <h2 class="title">Nos Films De Science-fiction</h2>
+      <div class="Movie__list" id="Movies__Science-fiction"></div>
+      <h2 class="title">Nos Films D'Animation</h2>
+      <div class="Movie__list" id="Movies__Animation"></div>
+      <h2 class="title">Nos Thriller</h2>
+      <div class="Movie__list" id="Movies__Thriller"></div>
+      <h2 class="title">Nos Films D'Horreur</h2>
+      <div class="Movie__list" id="Movies__Horreur"></div>
+      <h2 class="title">Nos Films D'Aventure</h2>
+      <div class="Movie__list" id="Movies__Aventure"></div>
+      <h2 class="title">Nos Films Fantaisiste</h2>
+      <div class="Movie__list" id="Movies__Fantaisie"></div>
+      <h2 class="title">Nos Documentaire</h2>
+      <div class="Movie__list" id="Movies__Documentaire"></div>
+      
     </section>
 
     <script type="module">
+      // Importation des modules
       import { NavBar } from "./component/NavBar/script.js";
       import { Movie } from "./component/Movies_list/script.js";
+      import { MovieCat } from "./component/Movies_list_Cat/script.js";
       import { MovieDetail } from "./component/MovieDetail/script.js";
       import { DataMovie } from "./data/dataMovie.js";
 
@@ -29,7 +52,7 @@
           "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
         );
       };
-
+      // sert a recuperer les details du film
       C.handlerDetail = async function (id) {
         let data = await DataMovie.requestMovieDetails(id);
         if (!data || data.length === 0) {
@@ -38,16 +61,60 @@
         }
 
         console.log("Film reçu :", data[0]); // Pour vérifier
-
+        // On affiche les détails du film
         let detailDiv = document.querySelector("#Movie__detail");
         detailDiv.innerHTML = MovieDetail.format(data[0]);
         detailDiv.style.display = "block"; // Show the detail section
       };
 
+      C.getMovies = async function () {
+        let data = await DataMovie.request();
+        if (data === undefined || data === 0) {
+          alert("Erreur de chargement des films.");
+          return;
+        }
+
+        V.renderMoviesList(data);
+      };
+      // ← important
+
+      // ------ Itération 4 ------ //
+
+      C.getMoviesCat = async function (category) {
+        let data2 = await DataMovie.requestCat(category);
+        if (data2 === undefined || data2.length === 0) {
+          // alert("Erreur de chargement des films pour une catégorie " + category + ". Aucun film n'a été importé où n'est présent sur le site.");
+          return;
+        }
+        let categoryContainer = document.querySelector("#Movies__"+category);
+        categoryContainer.innerHTML = MovieCat.formatMany(data2);
+        // Add click event listeners to category film cards
+        let filmCards = categoryContainer.querySelectorAll(".film__card__cat");
+        filmCards.forEach((card) => {
+          card.addEventListener("click", () => {
+        let movieId = card.getAttribute("data-id");
+        C.handlerDetail(movieId);
+          });
+        });
+      };
+
       C.start = function () {
         V.renderNavBar("C.handlerAbout()");
         C.getMovies();
+        C.getMoviesCat("Action");
+        C.getMoviesCat("Comedie");
+        C.getMoviesCat("Drame");
+        C.getMoviesCat("Science-fiction");
+        C.getMoviesCat("Animation");
+        C.getMoviesCat("Thriller");
+        C.getMoviesCat("Horreur");
+        C.getMoviesCat("Aventure");
+        C.getMoviesCat("Fantaisie");
+        C.getMoviesCat("Documentaire");
+        
       };
+
+      // -------------------------------------------------------------------------------------//
 
       window.V = {};
 
@@ -55,6 +122,8 @@
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(hAbout);
       };
+
+      // ------ Premet de generer la première liste de tout les films ------ //
 
       V.renderMoviesList = function (obj) {
         let test = document.querySelector("#Movies__list");
@@ -70,17 +139,26 @@
         });
       };
 
-      C.getMovies = async function () {
-        let data = await DataMovie.request();
-        if (data === undefined || data === 0) {
-          alert("Erreur de chargement des films.");
-          return;
-        }
+      // ------ Itération 4 ------ //
+      // ------ Premet de generer la liste de certaine catégorie ------ //
 
-        V.renderMoviesList(data);
+      V.renderMoviesListCat = function (obj) {
+        let test = document.querySelector("#Movies__Action");
+        test.innerHTML = MovieCat.formatMany(obj);
+
+        // Add click event listeners to film cards
+        let filmCards = test.querySelectorAll(".film__card__cat");
+        filmCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            let movieId = card.getAttribute("data-id");
+            C.handlerDetail(movieId);
+          });
+        });
       };
 
-      // Hide #Movie__detail when clicking outside of it
+      //  Ces lignes au dessous servent a l'itération 3. Elles font apparaitre et disparaitre les détails du film
+
+      // Hide #Movie__detail quand on clique au dehors
       document.addEventListener("click", (event) => {
         let detailDiv = document.querySelector("#Movie__detail");
         if (

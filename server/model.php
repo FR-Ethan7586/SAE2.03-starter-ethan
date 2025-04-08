@@ -32,7 +32,9 @@ function getMovie()
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     // Requête SQL pour récupérer le Movie avec des paramètres
-    $sql = "SELECT name, image, id FROM Movie";
+    $sql = "SELECT Movie.name, Movie.image, Movie.id, Category.name AS category 
+    FROM Movie
+    INNER JOIN Category ON Movie.id_category = Category.id";
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
     // Exécute la requête SQL
@@ -111,5 +113,28 @@ function updateMovie($n, $d, $y, $l, $de, $c, $a, $i, $t)
     $stmt->execute();
     // Récupère le nombre de lignes affectées par la requête
     $res = $stmt->rowCount();
+    return $res; // Retourne les résultats
+}
+
+
+//  ------------------ Itération 4 ------------------  //
+
+function getMoviePerCategorie($cat)
+{
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL pour récupérer le Movie avec des paramètres
+    $sql = "SELECT Movie.name, Movie.image, Movie.id
+            FROM Movie
+            INNER JOIN Category ON Movie.id_category = Category.id
+            WHERE Category.name = :category_name;";
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+
+    $stmt->bindParam(':category_name', $cat);
+    // Exécute la requête SQL
+    $stmt->execute();
+    // Récupère les résultats de la requête sous forme d'objets
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res; // Retourne les résultats
 }

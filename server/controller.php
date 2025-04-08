@@ -53,8 +53,16 @@ function updateController()
   $ok = updateMovie($nom, $rea, $annee, $duree, $desc, $cat, $age, $img, $trailer);
   // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
   if ($ok != 0) {
-    return "Le film du $nom de $rea est à jour";
+    return "Le film $nom de $rea a été ajouté avec succès !";
   } else {
     return false;
   }
+}
+
+
+//  ------------------ Itération 4 ------------------
+
+function readMoviesPerCategorieController(){
+  $film_list_cat = getMoviePerCategorie($_REQUEST['category']);
+  return $film_list_cat;
 }

@@ -21,6 +21,16 @@ DataMovie.requestMovieDetails = async function (id) {
   return data;
 };
 
+DataMovie.requestCat = async function (cat) {
+  let answer2 = await fetch(
+    HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=readMoviesCat&category=" + cat
+  );
+  let data2 = await answer2.json();
+  return data2;
+};
+
 //---------------------------------------------------------------------------------------------//
 
 export { DataMovie };
+
+

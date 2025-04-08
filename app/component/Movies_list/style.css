@@ -16,7 +16,8 @@
     box-shadow: 0 2px 3px 1px rgba(0,0,0,.45), inset 0 0 5px 2px rgba(255,255,255,.4);
   }
 
-.title__1{
+.title--1 {
+    padding-top: 8rem;
     margin: 1rem 1rem 0 1rem;
     font-size: 1.5rem;
     font-weight: 700;

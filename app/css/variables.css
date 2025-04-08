@@ -13,11 +13,13 @@
   --color-space-cadet: #3B3355;
   --color-thistle: #C6B9CD;
   --color-columbia-blue: #AFD2E9;
+  --color-onyx: #3A3A4B;
 
   /* Sementic Tokens */
   --color-fg: var(--color-white);
   --color-bg-nav: var(--color-ultra-violet);
   --color-bg-card: var(--color-thistle);
+  --color-bg-detail: var(--color-onyx);
   --color-bg: var(--color-space-cadet);
   --color-text: var(--color-white);
 }

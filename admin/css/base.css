@@ -13,7 +13,7 @@ body{
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    background-color: var(--color-bg);
+    background-image: url("../Assets/fond-etoilee.jpg");
 }
 
 .admin__title{
