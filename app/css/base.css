@@ -8,6 +8,7 @@
 @import "../component/Movies_list_Cat/style.css" layer(components);
 @import "../component/NavBar/style.css" layer(components);
 @import "../component/MovieDetail/style.css" layer(components);
+@import "../component/ProfilChoice/style.css" layer(components);
 
 body{
     background-color: var(--color-bg);

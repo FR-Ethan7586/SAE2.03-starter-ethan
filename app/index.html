@@ -34,7 +34,10 @@
       <div class="Movie__list" id="Movies__Fantaisie"></div>
       <h2 class="title">Nos Documentaire</h2>
       <div class="Movie__list" id="Movies__Documentaire"></div>
-      
+      <div class="Profil__choice" id="Profil__choice">
+        <h2 class="Profil__choice__title">Choisissez votre Profil</h2>
+        <div class="Profil__cards" id="Profil__cards"></div>
+      </div>
     </section>
 
     <script type="module">
@@ -45,6 +48,7 @@
       import { MovieDetail } from "./component/MovieDetail/script.js";
       import { DataMovie } from "./data/dataMovie.js";
       import { DataProfil } from "./data/dataProfil.js";
+      import { Profil } from "./component/ProfilChoice/script.js";
 
       window.C = {};
 
@@ -65,8 +69,14 @@
         // On affiche les détails du film
         let detailDiv = document.querySelector("#Movie__detail");
         detailDiv.innerHTML = MovieDetail.format(data[0]);
-        detailDiv.style.display = "block"; // Show the detail section
+        detailDiv .style.display = "block"; // Show the detail section
       };
+
+      C.handlerProfil = async function (id) {
+        let idProfil = id;
+        console.log("Profil sélectionné :", idProfil); // Pour vérifier
+      };
+
 
       C.getMovies = async function () {
         let data = await DataMovie.request();
@@ -87,14 +97,14 @@
           // alert("Erreur de chargement des films pour une catégorie " + category + ". Aucun film n'a été importé où n'est présent sur le site.");
           return;
         }
-        let categoryContainer = document.querySelector("#Movies__"+category);
+        let categoryContainer = document.querySelector("#Movies__" + category);
         categoryContainer.innerHTML = MovieCat.formatMany(data2);
         // Add click event listeners to category film cards
         let filmCards = categoryContainer.querySelectorAll(".film__card__cat");
         filmCards.forEach((card) => {
           card.addEventListener("click", () => {
-        let movieId = card.getAttribute("data-id");
-        C.handlerDetail(movieId);
+            let movieId = card.getAttribute("data-id");
+            C.handlerDetail(movieId);
           });
         });
       };
@@ -105,10 +115,13 @@
           alert("Erreur de chargement du profil.");
           return;
         }
+        V.renderProfilChoice(data);
+        let id = data.id;
       };
 
       C.start = function () {
         V.renderNavBar("C.handlerAbout()");
+
         C.getMovies();
         C.getMoviesCat("Action");
         C.getMoviesCat("Comedie");
@@ -121,7 +134,6 @@
         C.getMoviesCat("Fantaisie");
         C.getMoviesCat("Documentaire");
         C.getProfil();
-        
       };
 
       // -------------------------------------------------------------------------------------//
@@ -166,6 +178,20 @@
         });
       };
 
+      V.renderProfilChoice = function (obj) {
+        let test = document.querySelector("#Profil__cards");
+        test.innerHTML = Profil.formatMany(obj);
+
+        // Add click event listeners to Profiles cards
+        let Profils = test.querySelectorAll(".Profile");
+        Profils.forEach((card) => {
+          card.addEventListener("click", () => {
+            // let ProfileId = card.getAttribute("data-id");
+            // C.handlerProfil(ProfileId);
+          });
+        });
+      };
+
       //  Ces lignes au dessous servent a l'itération 3. Elles font apparaitre et disparaitre les détails du film
 
       // Hide #Movie__detail quand on clique au dehors
@@ -179,6 +205,7 @@
         }
       });
 
+      // Barre De Navigation
       // Sélectionner le bouton et l'élément cible
       document.getElementById("Home__btn");
       document.addEventListener("click", function () {
@@ -188,6 +215,23 @@
         // Vérifier si l'élément existe avant de scroller
         if (targetElement) {
           targetElement.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+
+      // Pour les Profils
+      document.addEventListener("click", (event) => {
+        let profilDiv = document.querySelector("#Profil__choice");
+        if (
+          event.target.classList.contains("Profile") ||
+          event.target.classList.contains("profile__img") ||
+          event.target.classList.contains("profile__name")
+        ) {
+          let profileCard = event.target.closest(".Profile");
+          if (profileCard) {
+            let profileId = profileCard.getAttribute("data-id");
+            C.handlerProfil(profileId);
+          }
+          profilDiv.style.display = "none";
         }
       });
 

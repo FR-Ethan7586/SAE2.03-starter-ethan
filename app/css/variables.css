@@ -20,6 +20,8 @@
   --color-bg-nav: var(--color-ultra-violet);
   --color-bg-card: var(--color-thistle);
   --color-bg-detail: var(--color-onyx);
+  --color-bg-profil: var(--color-columbia-blue);
   --color-bg: var(--color-space-cadet);
   --color-text: var(--color-white);
+  --color-border-profil: var(--color-white)
 }
