@@ -23,7 +23,7 @@ require("model.php");
 
 function readMoviesController()
 {
-  $film_list = getMovie();
+  $film_list = getMovie($_REQUEST['age']);
   return $film_list;
 }
 
@@ -66,7 +66,7 @@ function updateController()
 
 function readMoviesPerCategorieController()
 {
-  $film_list_cat = getMoviePerCategorie($_REQUEST['category']);
+  $film_list_cat = getMoviePerCategorie($_REQUEST['category'], $_REQUEST['age']);
   return $film_list_cat;
 }
 

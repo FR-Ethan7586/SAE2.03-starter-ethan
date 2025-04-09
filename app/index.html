@@ -69,17 +69,30 @@
         // On affiche les détails du film
         let detailDiv = document.querySelector("#Movie__detail");
         detailDiv.innerHTML = MovieDetail.format(data[0]);
-        detailDiv .style.display = "block"; // Show the detail section
+        detailDiv.style.display = "block"; // Show the detail section
       };
 
-      C.handlerProfil = async function (id) {
-        let idProfil = id;
-        console.log("Profil sélectionné :", idProfil); // Pour vérifier
+      C.handlerProfil = async function (age) {
+        C.ageProfil = age;
+        console.log("Âge du profil sélectionné :", C.ageProfil);
+        await C.getMovies(age); // On charge automatiquement les films du profil
+        await C.getMoviesCat("Action", age);
+        await C.getMoviesCat("Comedie", age);
+        await C.getMoviesCat("Drame", age);
+        await C.getMoviesCat("Science-fiction", age);
+        await C.getMoviesCat("Animation", age);
+        await C.getMoviesCat("Thriller", age);
+        await C.getMoviesCat("Horreur", age);
+        await C.getMoviesCat("Aventure", age);
+        await C.getMoviesCat("Fantaisie", age);
+        await C.getMoviesCat("Documentaire", age);
+        return age;
       };
 
+      C.getMovies = async function (age) {
+        // On récupère l’âge stocké par handlerProfil
+        let data = await DataMovie.request(age);
 
-      C.getMovies = async function () {
-        let data = await DataMovie.request();
         if (data === undefined || data === 0) {
           alert("Erreur de chargement des films.");
           return;
@@ -91,12 +104,8 @@
 
       // ------ Itération 4 ------ //
 
-      C.getMoviesCat = async function (category) {
-        let data2 = await DataMovie.requestCat(category);
-        if (data2 === undefined || data2.length === 0) {
-          // alert("Erreur de chargement des films pour une catégorie " + category + ". Aucun film n'a été importé où n'est présent sur le site.");
-          return;
-        }
+      C.getMoviesCat = async function (category, age) {
+        let data2 = await DataMovie.requestCat(category, age);
         let categoryContainer = document.querySelector("#Movies__" + category);
         categoryContainer.innerHTML = MovieCat.formatMany(data2);
         // Add click event listeners to category film cards
@@ -120,19 +129,7 @@
       };
 
       C.start = function () {
-        V.renderNavBar("C.handlerAbout()");
-
-        C.getMovies();
-        C.getMoviesCat("Action");
-        C.getMoviesCat("Comedie");
-        C.getMoviesCat("Drame");
-        C.getMoviesCat("Science-fiction");
-        C.getMoviesCat("Animation");
-        C.getMoviesCat("Thriller");
-        C.getMoviesCat("Horreur");
-        C.getMoviesCat("Aventure");
-        C.getMoviesCat("Fantaisie");
-        C.getMoviesCat("Documentaire");
+        V.renderNavBar();
         C.getProfil();
       };
 
@@ -229,7 +226,6 @@
           let profileCard = event.target.closest(".Profile");
           if (profileCard) {
             let profileId = profileCard.getAttribute("data-id");
-            C.handlerProfil(profileId);
           }
           profilDiv.style.display = "none";
         }

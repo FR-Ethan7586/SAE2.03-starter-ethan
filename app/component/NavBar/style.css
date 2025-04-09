@@ -1,6 +1,6 @@
 html {
-  scroll-padding-top: 10rem; 
-  scroll-behavior: smooth;/* Prend en compte la hauteur de la barre de navigation pour aller vers.... */
+  scroll-padding-top: 10rem;
+  scroll-behavior: smooth; /* Prend en compte la hauteur de la barre de navigation pour aller vers.... */
 }
 
 .navbar {
@@ -9,7 +9,7 @@ html {
   width: 100%;
   z-index: 10;
   display: flex;
-  
+  justify-content: space-between;
   align-items: center;
   padding: 1rem 3rem;
   color: var(--color-fg);
@@ -18,7 +18,7 @@ html {
   .navbar__item {
     --_offset: 0.2rem;
     padding: 1rem 1rem;
-    
+
     text-decoration: underline;
     text-decoration-thickness: 0.1rem;
     text-underline-offset: var(--_offset);
@@ -32,12 +32,44 @@ html {
   }
 }
 
-.navbar__logo--a{
+/* Menu Drop Down des Catégories */
+
+.dropdown__item {
+  padding: 1rem 1rem;
+  text-wrap: nowrap;
+  cursor: pointer;
+  color: var(--color-fg);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown__toggle {
+  cursor: pointer;
+}
+
+.dropdown__menu {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  padding: 1rem;
+  background-color: var(--color-bg-detail);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+
+.dropdown__toggle:focus + .dropdown__menu{
+  display: block;
+}
+
+.navbar__logo--a {
   width: 4rem;
   height: 4rem;
 }
 
-.navbar__logo {
+.navbar__logo,
+.navbar__logo--a {
   height: 4rem;
   width: 4rem;
   flex-shrink: 0;
@@ -45,11 +77,10 @@ html {
 
 .navbar__list {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   padding: 0;
   width: 100%; /* S'assurer que le conteneur prend toute la largeur disponible */
-  overflow: hidden; /* Empêche le débordement */
 }
 
 /* .main-nav__list{
@@ -83,7 +114,7 @@ li {
   transition-duration: 1s;
 }
 
-#menu-toggle{
+#menu-toggle {
   display: none;
 }
 
@@ -93,12 +124,19 @@ li {
   z-index: 10;
   /* Curseur pointer */
   cursor: pointer;
-  @media (min-width: 95rem) {
+  @media (min-width: 50rem) {
     & {
       /* Masquer le burger */
       display: none;
     }
   }
+}
+
+.label{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .burger__line:nth-child(1) {
@@ -166,7 +204,7 @@ li {
   margin-block: 1rem;
 }
 
-@media (min-width: 95em) {
+@media (min-width: 50rem) {
   .main-nav {
     /* Retour à la valeur initiale de la propriété position*/
     position: relative;
@@ -177,7 +215,7 @@ li {
     /* Réinitialise la translation */
     translate: 0%;
   }
-  .main-nav__list{
+  .main-nav__list {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;

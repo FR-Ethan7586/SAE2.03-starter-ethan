@@ -2,9 +2,9 @@ let HOST_URL = "https://mmi.unilim.fr/~lochis1/"; // CHANGE THIS TO MATCH YOUR C
 
 let DataMovie = {};
 
-DataMovie.request = async function () {
+DataMovie.request = async function (age) {
   let answer = await fetch(
-    HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=readMovies"
+    HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=readMovies&age=" + age
   );
   let data = await answer.json();
   return data;
@@ -21,9 +21,9 @@ DataMovie.requestMovieDetails = async function (id) {
   return data;
 };
 
-DataMovie.requestCat = async function (cat) {
+DataMovie.requestCat = async function (cat, age) {
   let answer2 = await fetch(
-    HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=readMoviesCat&category=" + cat
+    HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=readMoviesCat&category=" + cat + "&age=" + age
   );
   let data2 = await answer2.json();
   return data2;

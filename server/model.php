@@ -27,16 +27,17 @@ define("DBPWD", "lochis1");
  * @param string $t Le titre du film qu'on recup.
  * @return array Un tableau d'objets contenant l'image et le titre du film.
  */
-function getMovie()
+function getMovie($age)
 {
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
     // Requête SQL pour récupérer le Movie avec des paramètres
-    $sql = "SELECT Movie.name, Movie.image, Movie.id, Category.name AS category 
+    $sql = "SELECT Movie.name, Movie.image, Movie.id, Movie.min_age
     FROM Movie
-    INNER JOIN Category ON Movie.id_category = Category.id";
+    WHERE Movie.min_age <= :age";
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':age', $age);
     // Exécute la requête SQL
     $stmt->execute();
     // Récupère les résultats de la requête sous forme d'objets
@@ -119,7 +120,7 @@ function updateMovie($n, $d, $y, $l, $de, $c, $a, $i, $t)
 
 //  ------------------ Itération 4 ------------------  //
 
-function getMoviePerCategorie($cat)
+function getMoviePerCategorie($cat, $age)
 {
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
@@ -127,11 +128,12 @@ function getMoviePerCategorie($cat)
     $sql = "SELECT Movie.name, Movie.image, Movie.id
             FROM Movie
             INNER JOIN Category ON Movie.id_category = Category.id
-            WHERE Category.name = :category_name;";
+            WHERE Category.name = :category_name AND Movie.min_age <= :age";
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
 
     $stmt->bindParam(':category_name', $cat);
+    $stmt->bindParam(':age', $age);
     // Exécute la requête SQL
     $stmt->execute();
     // Récupère les résultats de la requête sous forme d'objets

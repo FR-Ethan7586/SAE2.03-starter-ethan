@@ -1,12 +1,6 @@
 <nav class="navbar font-sans">
-  <a
-    class="navbar__logo--a"
-    href="https://mmi.unilim.fr/~lochis1/SAE2.03-starter-ethan/app/"
-    ><img
-      class="navbar__logo"
-      src="./images/logo_vod.png"
-      alt="Logo du site web"
-  /></a>
+  <a class="navbar__logo--a" href="https://mmi.unilim.fr/~lochis1/SAE2.03-starter-ethan/app/"><img class="navbar__logo"
+      src="./images/logo_vod.png" alt="Logo du site web" /></a>
   <ul class="navbar__list">
     <!-- <li class="navbar__item" onclick="{{hAbout}}">About</li>
     <li class="navbar__item" id="Home__btn" >Home</li> -->
@@ -15,38 +9,14 @@
       <!-- le svg defini une boite de 32x32 -->
       <svg class="burger" viewBox="0 0 32 32" width="32" height="32">
         <!-- Créer une ligne y=7 -->
-        <line
-          class="burger__line"
-          x1="2"
-          y1="7"
-          x2="30"
-          y2="7"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-        />
+        <line class="burger__line" x1="2" y1="7" x2="30" y2="7" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" />
         <!-- Créer une ligne y=16 -->
-        <line
-          class="burger__line"
-          x1="2"
-          y1="16"
-          x2="30"
-          y2="16"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-        />
+        <line class="burger__line" x1="2" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" />
         <!-- Créer une ligne y=25 -->
-        <line
-          class="burger__line"
-          x1="2"
-          y1="25"
-          x2="30"
-          y2="25"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-        />
+        <line class="burger__line" x1="2" y1="25" x2="30" y2="25" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" />
       </svg>
     </label>
     <nav class="main-nav">
@@ -54,41 +24,40 @@
         <li class="main-nav__item">
           <a href="#Movies__list" class="navbar__item">Home</a>
         </li>
-        <li class="main-nav__item">
-          <a href="#Movies__Action" class="navbar__item">Action</a>
-        </li>
-        <li class="main-nav__item">
-          <a href="#Movies__Comedie" class="navbar__item">Comedies</a>
-        </li>
-        <li class="main-nav__item">
-          <a href="#Movies__Drame" class="navbar__item">Drames</a>
-        </li>
-        <li class="main-nav__item">
-          <a href="#Movies__Science-fiction" class="navbar__item"
-            >Science-fiction</a
-          >
-        </li>
-        <li class="main-nav__item">
-          <a href="#Movies__Animation" class="navbar__item"
-            >Films d'Animation</a
-          >
-        </li>
-        <li class="main-nav__item">
-          <a href="#Movies__Thriller" class="navbar__item">Thrillers</a>
-        </li>
-        <li class="main-nav__item">
-          <a href="#Movies__Horreur" class="navbar__item">Films d'Horreur</a>
-        </li>
-        <li class="main-nav__item">
-          <a href="#Movies__Aventure" class="navbar__item">Films d'Aventure</a>
-        </li>
-        <li class="main-nav__item">
-          <a href="#Movies__Fantaisie" class="navbar__item"
-            >Films Fantastique</a
-          >
-        </li>
-        <li class="main-nav__item">
-          <a href="#Movies__Documentaire" class="navbar__item">Documentaires</a>
+        <li class="main-nav__item dropdown">
+          <a href="#" class="navbar__item dropdown__toggle">Genres</a>
+          <ul class="dropdown__menu">
+            <li class="dropdown__item">
+              <a href="#Movies__Action" class="navbar__item">Action</a>
+            </li>
+            <li class="dropdown__item">
+              <a href="#Movies__Comedie" class="navbar__item">Comédies</a>
+            </li>
+            <li class="dropdown__item">
+              <a href="#Movies__Drame" class="navbar__item">Drames</a>
+            </li>
+            <li class="dropdown__item">
+              <a href="#Movies__Science-fiction" class="navbar__item">Science-fiction</a>
+            </li>
+            <li class="dropdown__item">
+              <a href="#Movies__Animation" class="navbar__item">Films d'Animation</a>
+            </li>
+            <li class="dropdown__item">
+              <a href="#Movies__Thriller" class="navbar__item">Thrillers</a>
+            </li>
+            <li class="dropdown__item">
+              <a href="#Movies__Horreur" class="navbar__item">Films d'Horreur</a>
+            </li>
+            <li class="dropdown__item">
+              <a href="#Movies__Aventure" class="navbar__item">Films d'Aventure</a>
+            </li>
+            <li class="dropdown__item">
+              <a href="#Movies__Fantaisie" class="navbar__item">Films Fantastique</a>
+            </li>
+            <li class="dropdown__item">
+              <a href="#Movies__Documentaire" class="navbar__item">Documentaires</a>
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>
