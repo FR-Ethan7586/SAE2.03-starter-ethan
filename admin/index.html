@@ -10,13 +10,17 @@
     <h1 class="admin__title">Bienvenue dans le back office !</h1>
     <section id="log"></section>
     <section id="addMovie"></section>
-    <section id="addProfil"></section>
+    <div class="Profil">
+      <section id="addProfil"></section>
+      <section id="modifyProfil"></section>
+    </div>
 
     <script type="module">
       import { Log } from "./component/Log/script.js";
       import { DataMovie } from "./data/dataMovie.js";
       import { DataProfil } from "./data/dataProfil.js";
       import { ProfilForm } from "./component/ProfileForm/script.js";
+      import { ProfilModifyForm } from "./component/ProfileModifyForm/script.js";
       import { MovieForm } from "./component/MovieForm/script.js";
 
       window.C = {};
@@ -44,6 +48,22 @@
         // Affiche le résultat de la mise à jour dans le journal
         V.renderLog(res2);
       };
+
+      C.handlerModifyProfil = async function () {
+        let profiles = await DataProfil.get();
+        consolelog(profiles);
+        ProfilModifyForm.formatOne(profiles);
+        ProfilModifyForm.format(C.handlerAddProfil);
+        
+        let form3 = document.querySelector(".modifyProfil__form");
+        let fd3 = new FormData(form3);
+        // Attend la réponse de la fonction `DataMenu.update(fd)`
+        let res3 = await DataProfil.update(fd3);
+        // Affiche le résultat de la mise à jour dans le journal
+        V.renderLog(res3);
+      };
+
+
 
       window.V = {};
 
