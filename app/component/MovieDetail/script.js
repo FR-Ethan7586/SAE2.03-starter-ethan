@@ -5,6 +5,8 @@ let MovieDetail = {};
 
 MovieDetail.format = function (obj1) {
   let html = template;
+  html = html.replace("{idfilm}", obj1.id);
+  html = html.replace("{{nom_film}}", obj1.name || "Titre inconnu");
   html = html.replace("{{nom_film}}", obj1.name || "Titre inconnu");
   html = html.replace("{{date}}", obj1.year);
   html = html.replace("{{realisateur}}", obj1.director);

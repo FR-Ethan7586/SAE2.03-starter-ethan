@@ -1,8 +1,8 @@
 <div class="movie__info">
   <div class="movie__info__header">
-    <h2 class="movie__info__title">{{nom_film}}</h2>
-    <button class="movie__info__favorite" onclick="handleFavorite()">
-      Add to Favorites
+    <h2 class="movie__info__title" data-id="{{nom_film}}">{{nom_film}}</h2>
+    <button class="movie__info__favorite" onclick="C.handlerFavorite({idfilm})">
+      <img class="movie__info__fav-icon" src="./images/icons/add_fav.webp" alt="Ajouter un favoris">
     </button>
   </div>
   <ul class="movie__info__list">

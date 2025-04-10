@@ -68,11 +68,66 @@
           return;
         }
 
-        console.log("Film reçu :", data[0]); // Pour vérifier
-        // On affiche les détails du film
+        const movie = data[0];
+        console.log("Film reçu :", movie);
+
+        // Affichage du détail
         let detailDiv = document.querySelector("#Movie__detail");
-        detailDiv.innerHTML = MovieDetail.format(data[0]);
-        detailDiv.style.display = "block"; // Show the detail section
+        detailDiv.innerHTML = MovieDetail.format(movie);
+        detailDiv.style.display = "block";
+
+        // Mise à jour du bouton favori selon que le film est déjà un favori
+        let favBtnImg = detailDiv.querySelector(".movie__info__fav-icon");
+        if (!favBtnImg){
+          console.error("Image du bouton favori introuvable dans le détail du film.");
+          return;
+        }
+
+        console.log("Nom du film :", movie.name);
+
+        const isFav = C.favNames.includes(movie.name); // Assure-toi que `movie.name` correspond au nom dans favNames
+
+        // Si déjà favori, on affiche l'icône de suppression, sinon ajout
+        if (isFav) {
+          favBtnImg.src = "./images/icons/remove_fav.webp";
+          favBtnImg.alt = "Retirer des favoris";
+          console.log("Le film est déjà dans les favoris.");
+        } else {
+          favBtnImg.src = "./images/icons/add_fav.webp";
+          favBtnImg.alt = "Ajouter aux favoris";
+          console.log("Le film n'est pas dans les favoris.");
+        }
+
+        // Gérer le clic sur le bouton favori
+        let favBtn = detailDiv.querySelector(".movie__info__favorite");
+        favBtn.addEventListener("click", async () => {
+          // On met d'abord à jour l'icône avant de faire la requête au backend
+          if (C.favNames.includes(movie.name)) {
+            // Le film est déjà favori, on le retire
+            favBtnImg.src = "./images/icons/add_fav.webp";
+            favBtnImg.alt = "Ajouter aux favoris";
+            C.favNames = C.favNames.filter((n) => n !== movie.name); // Retirer le film des favoris
+          } else {
+            // Le film n'est pas encore favori, on l'ajoute
+            favBtnImg.src = "./images/icons/remove_fav.webp";
+            favBtnImg.alt = "Retirer des favoris";
+            C.favNames.push(movie.name); // Ajouter le film aux favoris
+          }
+
+          // Appel à la fonction de backend pour ajouter ou retirer le favori
+          let result = await DataMovie.addFav(C.idProfil, movie.id);
+
+          if (result.action === "added") {
+            console.log("Film ajouté aux favoris");
+          } else if (result.action === "removed") {
+            console.log("Film retiré des favoris");
+          }
+        });
+      };
+
+      // idp est l'id profil et idf est l'id film
+      C.handlerFavorite = async function (idf) {
+        DataMovie.addFav(C.idProfil, idf);
       };
 
       C.handlerProfil = async function (age, id) {
@@ -105,6 +160,9 @@
         if (data === undefined || data === 0) {
           alert("Erreur de chargement des films.");
         }
+
+        C.favNames = data.map((movie) => movie.movie_name); // on m'as gentillement explique map :)
+        console.log("Nom des Films en favoris dans C.favMovies :", C.favMovies);
         console.log("Film reçu :", data);
         // Pour vérifier
 

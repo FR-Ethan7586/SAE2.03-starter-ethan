@@ -116,3 +116,17 @@ function readMoviesWithNameController()
   $film_list_fav = getMovieWithName($_REQUEST['name']);
   return $film_list_fav;
 }
+
+function updateFavMovieController()
+{
+  $idp = $_REQUEST['profil_id'];
+  $idf = $_REQUEST['movie_id'];
+
+  $ok = addFavMovie($idp, $idf);
+  // $ok est le nombre de ligne affecté par l'opération de mise à jour dans la BDD (voir model.php)
+  if ($ok != 0) {
+    return "Le film $idf a été ajouté en favoris pour le profil $idp !";
+  } else {
+    return false;
+  }
+}

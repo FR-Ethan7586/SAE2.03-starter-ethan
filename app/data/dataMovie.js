@@ -46,5 +46,41 @@ DataMovie.requestMovieWname = async function (name) {
 }
 //---------------------------------------------------------------------------------------------//
 
+DataMovie.addFav = async function (idp, idf) {
+  // Créer l'objet FormData à envoyer
+  let fdata = new FormData();
+  fdata.append("profil_id", idp);
+  fdata.append("movie_id", idf);
+
+  // Vérification des données ajoutées par copilot :)
+  for (let pair of fdata.entries()) {
+    console.log(`${pair[0]}: ${pair[1]}`);
+  }
+
+  // Configuration de la requête POST
+  let config = {
+    method: "POST",
+    body: fdata,
+  };
+
+  try {
+    // Envoi de la requête
+    let answer = await fetch(HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=updateFavMovie", config);
+
+    // Vérification du succès de la requête
+    if (!answer.ok) {
+      throw new Error("Échec de la requête : " + answer.statusText);
+    }
+
+    // Récupération des données JSON
+    let data = await answer.json();
+    return data;
+
+  } catch (err) {
+    console.error("Erreur lors de l'ajout en favori :", err);
+    throw err; // pour que le code appelant puisse gérer l’erreur aussi
+  }
+};
+
 export { DataMovie };
 

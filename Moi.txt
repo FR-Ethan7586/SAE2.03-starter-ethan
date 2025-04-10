@@ -4,3 +4,8 @@ Pour MovieDetail Lorsque card est clique il apparait des que on clique a l'exter
 Itération 8 
 
 J'ai fait de name une clé unique donc aucun doublons ne peut exister puis je me sert de cette clée pour verifier si name existe deja si oui on update sinon on insert 
+
+
+Itération 10 
+
+Utilisation De data.map Pour recuperer le nom de tout les films en favoris du profil sélectionner pour ensuite les garder dans C.favMovies
