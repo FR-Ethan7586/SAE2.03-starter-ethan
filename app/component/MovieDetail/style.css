@@ -30,8 +30,16 @@
     margin: 0;
   }
 
-  .movie__info__favorite{
+  .movie__info__favorite {
     padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  .movie__info__favorite:hover{
+    scale: 1.1;
+  }
+  .movie__info__favorite:active{
+    scale: 0.9;
   }
 
   .movie__info__fav-icon {

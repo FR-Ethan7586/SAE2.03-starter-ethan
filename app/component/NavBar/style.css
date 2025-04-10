@@ -77,9 +77,9 @@ html {
 
 .navbar__list {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  padding: 0;
+  padding: 0 5rem;
   width: 100%; /* S'assurer que le conteneur prend toute la largeur disponible */
 }
 
@@ -103,8 +103,9 @@ li {
   /* Disposition en colonne centrée */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding-top: 25%;
   /* Arrière plan */
   background-color: var(--color-bg-nav);
   /* Translation de 100% de la largeur de l'élément à droite */
@@ -208,6 +209,8 @@ li {
   .main-nav {
     /* Retour à la valeur initiale de la propriété position*/
     position: relative;
+    justify-content: center;
+    padding: 0;
     inset: 0;
 
     /* Arrière plan transparent */
