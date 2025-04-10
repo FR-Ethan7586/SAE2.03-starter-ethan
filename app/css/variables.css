@@ -14,6 +14,7 @@
   --color-thistle: #C6B9CD;
   --color-columbia-blue: #AFD2E9;
   --color-onyx: #3A3A4B;
+  --color-dark-red: #900E0E;
 
   /* Sementic Tokens */
   --color-fg: var(--color-white);
@@ -23,5 +24,6 @@
   --color-bg-profil: var(--color-columbia-blue);
   --color-bg: var(--color-space-cadet);
   --color-text: var(--color-white);
-  --color-border-profil: var(--color-white)
+  --color-border-profil: var(--color-white);
+  --color-bg-fav: var(--color-dark-red);
 }

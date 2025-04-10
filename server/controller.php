@@ -102,3 +102,17 @@ function readProfilController()
   $profil = getProfil();
   return $profil;
 }
+
+
+function readMoviesFavController()
+{
+  $film_list_fav = getMovieFav($_REQUEST['idp']);
+  return $film_list_fav;
+}
+
+
+function readMoviesWithNameController()
+{
+  $film_list_fav = getMovieWithName($_REQUEST['name']);
+  return $film_list_fav;
+}

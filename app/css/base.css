@@ -6,6 +6,7 @@
 
 @import "../component/Movies_list/style.css" layer(components);
 @import "../component/Movies_list_Cat/style.css" layer(components);
+@import "../component/Movies_list_fav/style.css" layer(components);
 @import "../component/NavBar/style.css" layer(components);
 @import "../component/MovieDetail/style.css" layer(components);
 @import "../component/ProfilChoice/style.css" layer(components);

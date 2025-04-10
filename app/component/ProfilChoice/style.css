@@ -41,6 +41,7 @@
   height: 9.5rem;
   gap: 0.5rem;
   padding: 1rem;
+  cursor: pointer;
   border-radius: 15px;
   background-color: var(--color-bg-card);
 }

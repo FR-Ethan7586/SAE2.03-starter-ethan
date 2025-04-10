@@ -1,5 +1,10 @@
 <div class="movie__info">
-  <h2 class="movie__info__title">{{nom_film}}</h2>
+  <div class="movie__info__header">
+    <h2 class="movie__info__title">{{nom_film}}</h2>
+    <button class="movie__info__favorite" onclick="handleFavorite()">
+      Add to Favorites
+    </button>
+  </div>
   <ul class="movie__info__list">
     <li class="movie__info__list__item">{{date}}</li>
     <li class="movie__info__list__item">{{realisateur}}</li>
@@ -16,13 +21,13 @@
   <figcaption>{{description}}</figcaption>
 </div>
 <div class="movie__info__trailer__container">
-<iframe
-  class="movie__info__trailer"
-  src="{{trailer}}"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  referrerpolicy="strict-origin-when-cross-origin"
-  allowfullscreen
-></iframe>
+  <iframe
+    class="movie__info__trailer"
+    src="{{trailer}}"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
 </div>

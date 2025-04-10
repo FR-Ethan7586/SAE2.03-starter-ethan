@@ -29,6 +29,21 @@ DataMovie.requestCat = async function (cat, age) {
   return data2;
 };
 
+DataMovie.requestFav = async function (idp) {
+  let answer3 = await fetch(
+    HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=readMoviesfav&idp=" + idp
+  );
+  let data3 = await answer3.json();
+  return data3;
+}
+
+DataMovie.requestMovieWname = async function (name) {
+  let answer4 = await fetch(
+    HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=readMoviesWname&name=" + name
+  );
+  let data4 = await answer4.json();
+  return data4;
+}
 //---------------------------------------------------------------------------------------------//
 
 export { DataMovie };

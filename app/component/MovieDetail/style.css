@@ -47,6 +47,23 @@
   .movie__info__trailer__container {
     margin: 1rem 0 0 -0.5rem;
   }
+
+  .movie__info__header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .movie__info__favorite{
+    margin: 1rem 0;
+    padding: 0.5rem 0.2rem;
+    border: none;
+    border-radius: 150px;
+    cursor: pointer;
+    color: var(--color-fg);
+    background-color: var(--color-bg-fav);
+  }
 }
 
 @media (min-width: 570px) {
@@ -63,7 +80,9 @@
     align-items: center;
     margin-inline: auto;
   }
-}
+  .movie__info__favorite{
+    padding: 1rem 1rem;
+}}
 
 @media (min-width: 1200px) {
   #Movie__detail {
@@ -89,4 +108,6 @@
     width: 30rem;
     aspect-ratio: 16/9;
   }
-}
+  .movie__info__favorite{
+    padding: 1rem 1rem;
+}}

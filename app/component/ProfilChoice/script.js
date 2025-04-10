@@ -6,6 +6,7 @@ let Profil = {};
 Profil.format = function (obj) {
   let html = template;
   html = html.replace("{age}", obj.age);
+  html = html.replace("{id}", obj.id);
   html = html.replace("{{img}}", obj.image);
   html = html.replace("{{nom}}", obj.name);
   html = html.replace("{{nom}}", obj.name);

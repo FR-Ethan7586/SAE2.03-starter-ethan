@@ -189,3 +189,38 @@ function getProfil()
     return $res; // Retourne les résultats
 
 }
+
+function getMovieFav($id)
+{
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL pour récupérer le Movie avec des paramètres
+    $sql = "SELECT Movie.name AS movie_name FROM Favorites JOIN Movie ON Favorites.movie_id = Movie.id WHERE Favorites.profil_id = :id
+";
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+
+    $stmt->bindParam(':id', $id);
+    // Exécute la requête SQL
+    $stmt->execute();
+    // Récupère les résultats de la requête sous forme d'objets
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; // Retourne les résultats
+}
+
+function getMovieWithName($name)
+{
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL pour récupérer le Movie avec des paramètres
+    $sql = "SELECT Movie.name, Movie.image, Movie.id, Movie.min_age
+    FROM Movie
+    WHERE Movie.name = :name";
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+
+    $stmt->bindParam(':name', $name);
+    // Exécute la requête SQL
+    $stmt->execute();
+    // Récupère les résultats de la requête sous forme d'objets
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; // Retourne les résultats
+}

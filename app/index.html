@@ -11,7 +11,9 @@
     <header id="header"></header>
 
     <section id="content">
-      <h2 class="title--1">Tout Nos Films</h2>
+      <h2 class="title--0">Vos Films Favoris</h2>
+      <div class="Movie__list" id="MoviesFav__list"></div>
+      <h2 class="title">Tout Nos Films</h2>
       <div class="Movie__list" id="Movies__list"></div>
       <div id="Movie__detail" style="display: none"></div>
       <h2 class="title">Nos Films D'Action</h2>
@@ -45,6 +47,7 @@
       import { NavBar } from "./component/NavBar/script.js";
       import { Movie } from "./component/Movies_list/script.js";
       import { MovieCat } from "./component/Movies_list_Cat/script.js";
+      import { MovieFav } from "./component/Movies_list_fav/script.js";
       import { MovieDetail } from "./component/MovieDetail/script.js";
       import { DataMovie } from "./data/dataMovie.js";
       import { DataProfil } from "./data/dataProfil.js";
@@ -72,9 +75,15 @@
         detailDiv.style.display = "block"; // Show the detail section
       };
 
-      C.handlerProfil = async function (age) {
+      C.handlerProfil = async function (age, id) {
         C.ageProfil = age;
-        console.log("Âge du profil sélectionné :", C.ageProfil);
+        C.idProfil = id;
+        console.log(
+          "Âge du profil sélectionné :",
+          C.ageProfil + " dont l'id est " + C.idProfil
+        );
+        await C.getFavMovies(id);
+
         await C.getMovies(age); // On charge automatiquement les films du profil
         await C.getMoviesCat("Action", age);
         await C.getMoviesCat("Comedie", age);
@@ -87,6 +96,19 @@
         await C.getMoviesCat("Fantaisie", age);
         await C.getMoviesCat("Documentaire", age);
         return age;
+      };
+
+      C.getFavMovies = async function (id) {
+        // On récupère l’âge stocké par handlerProfil
+        let data = await DataMovie.requestFav(id);
+
+        if (data === undefined || data === 0) {
+          alert("Erreur de chargement des films.");
+        }
+        console.log("Film reçu :", data);
+        // Pour vérifier
+
+        V.renderFavMoviesList(data);
       };
 
       C.getMovies = async function (age) {
@@ -158,6 +180,35 @@
         });
       };
 
+      V.renderFavMoviesList = async function (obj) {
+        console.log("Films utilisés :", obj); // Pour vérifier
+
+        // On prépare un tableau pour stocker tous les films récupérés
+        let allMoviesData = [];
+
+        // On boucle sur chaque élément du tableau obj
+        for (let film of obj) {
+          let movieName = film.movie_name; // On récupère le nom du film
+          let movieData = await DataMovie.requestMovieWname(movieName); // Récupère les données du film
+          if (movieData) {
+            allMoviesData.push(movieData); // On ajoute le film récupéré au tableau
+          }
+        }
+
+        // Maintenant qu'on a tous les films, on les affiche dans la page
+        let test = document.querySelector("#MoviesFav__list");
+        test.innerHTML = MovieFav.formatMany(allMoviesData); // Affiche les films récupérés
+
+        // Ajouter des écouteurs d'événements aux cartes de films
+        let filmCards = test.querySelectorAll(".film__card");
+        filmCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            let movieId = card.getAttribute("data-id");
+            C.handlerDetail(movieId); // Appelle la fonction pour afficher les détails du film
+          });
+        });
+      };
+
       // ------ Itération 4 ------ //
       // ------ Premet de generer la liste de certaine catégorie ------ //
 
@@ -202,8 +253,6 @@
         }
       });
 
-      
-
       // Pour les Profils
       document.addEventListener("click", (event) => {
         let profilDiv = document.querySelector("#Profil__choice");
@@ -220,7 +269,6 @@
         }
       });
 
-      
       C.start(); // Démarre l'application
     </script>
   </body>
