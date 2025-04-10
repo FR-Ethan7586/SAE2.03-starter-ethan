@@ -202,18 +202,7 @@
         }
       });
 
-      // Barre De Navigation
-      // Sélectionner le bouton et l'élément cible
-      document.getElementById("Home__btn");
-      document.addEventListener("click", function () {
-        // Sélectionner l'élément avec la classe .title__1
-        const targetElement = document.querySelector(".title__1");
-
-        // Vérifier si l'élément existe avant de scroller
-        if (targetElement) {
-          targetElement.scrollIntoView({ behavior: "smooth" });
-        }
-      });
+      
 
       // Pour les Profils
       document.addEventListener("click", (event) => {
@@ -231,6 +220,7 @@
         }
       });
 
+      
       C.start(); // Démarre l'application
     </script>
   </body>

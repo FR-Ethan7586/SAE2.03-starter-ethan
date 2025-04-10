@@ -1,1 +1,6 @@
 Pour MovieDetail Lorsque card est clique il apparait des que on clique a l'exterieur il disparait aussi Home renvoie en a Nos Films
+
+
+Itération 8 
+
+J'ai fait de name une clé unique donc aucun doublons ne peut exister puis je me sert de cette clée pour verifier si name existe deja si oui on update sinon on insert 

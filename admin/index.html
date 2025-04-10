@@ -49,22 +49,6 @@
         V.renderLog(res2);
       };
 
-      C.handlerModifyProfil = async function () {
-        let profiles = await DataProfil.get();
-        consolelog(profiles);
-        ProfilModifyForm.formatOne(profiles);
-        ProfilModifyForm.format(C.handlerAddProfil);
-        
-        let form3 = document.querySelector(".modifyProfil__form");
-        let fd3 = new FormData(form3);
-        // Attend la réponse de la fonction `DataMenu.update(fd)`
-        let res3 = await DataProfil.update(fd3);
-        // Affiche le résultat de la mise à jour dans le journal
-        V.renderLog(res3);
-      };
-
-
-
       window.V = {};
 
       V.renderLog = function (txt) {

@@ -59,7 +59,7 @@ html {
   border-radius: 0.5rem;
 }
 
-.dropdown__toggle:focus + .dropdown__menu{
+.dropdown:focus-within .dropdown__menu {
   display: block;
 }
 
