@@ -1,10 +1,10 @@
-let HOST_URL = "https://mmi.unilim.fr/~lochis1/"; // CHANGE THIS TO MATCH YOUR CONFIG
+let HOST_URL = ".."; // CHANGE THIS TO MATCH YOUR CONFIG
 
 let DataMovie = {};
 
 DataMovie.request = async function (age) {
   let answer = await fetch(
-    HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=readMovies&age=" + age
+    HOST_URL + "../../../server/script.php?todo=readMovies&age=" + age
   );
   let data = await answer.json();
   return data;
@@ -14,7 +14,7 @@ DataMovie.request = async function (age) {
 
 DataMovie.requestMovieDetails = async function (id) {
   let answer = await fetch(
-    HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=readMovie&id=" + id
+    HOST_URL + "../../../server/script.php?todo=readMovie&id=" + id
   );
   let data = await answer.json();
   console.log("Données reçues :", data);
@@ -23,7 +23,7 @@ DataMovie.requestMovieDetails = async function (id) {
 
 DataMovie.requestCat = async function (cat, age) {
   let answer2 = await fetch(
-    HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=readMoviesCat&category=" + cat + "&age=" + age
+    HOST_URL + "../../../server/script.php?todo=readMoviesCat&category=" + cat + "&age=" + age
   );
   let data2 = await answer2.json();
   return data2;
@@ -31,7 +31,7 @@ DataMovie.requestCat = async function (cat, age) {
 
 DataMovie.requestFav = async function (idp) {
   let answer3 = await fetch(
-    HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=readMoviesfav&idp=" + idp
+    HOST_URL + "../../../server/script.php?todo=readMoviesfav&idp=" + idp
   );
   let data3 = await answer3.json();
   return data3;
@@ -39,7 +39,7 @@ DataMovie.requestFav = async function (idp) {
 
 DataMovie.requestMovieWname = async function (name) {
   let answer4 = await fetch(
-    HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=readMoviesWname&name=" + name
+    HOST_URL + "../../../server/script.php?todo=readMoviesWname&name=" + name
   );
   let data4 = await answer4.json();
   return data4;
@@ -48,11 +48,22 @@ DataMovie.requestMovieWname = async function (name) {
 
 DataMovie.requestMAV = async function (age) {
   let answer2 = await fetch(
-    HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=readMoviesMAV&age=" + age
+    HOST_URL + "../../../server/script.php?todo=readMoviesMAV&age=" + age
+  );
+  let data2 = await answer2.json();
+  console.log("Données reçues :", data2);
+  return data2;
+};
+
+DataMovie.requestSearch = async function (age) {
+  let answer2 = await fetch(
+    HOST_URL + "../../../server/script.php?todo=readMoviesMAV&age=" + age
   );
   let data2 = await answer2.json();
   return data2;
 };
+
+
 //---------------------------------------------------------------------------------------------//
 
 DataMovie.addFav = async function (idp, idf) {
@@ -74,7 +85,7 @@ DataMovie.addFav = async function (idp, idf) {
 
   try {
     // Envoi de la requête
-    let answer = await fetch(HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=updateFavMovie", config);
+    let answer = await fetch(HOST_URL + "../../../server/script.php?todo=updateFavMovie", config);
 
     // Vérification du succès de la requête
     if (!answer.ok) {

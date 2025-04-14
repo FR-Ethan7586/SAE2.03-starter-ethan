@@ -11,7 +11,7 @@
     <header id="header"></header>
 
     <section id="content">
-      <h2 class="title--0">Vos Films Favoris</h2>
+      <h2 class="title title--0">Vos Films Favoris</h2>
       <div class="Movie__list" id="MoviesFav__list"></div>
       <h2 class="title">Les Films Mis en avant</h2>
       <div class="Movie__list" id="Movies__MAV"></div>
@@ -81,8 +81,10 @@
 
         // Mise à jour du bouton favori selon que le film est déjà un favori
         let favBtnImg = detailDiv.querySelector(".movie__info__fav-icon");
-        if (!favBtnImg){
-          console.error("Image du bouton favori introuvable dans le détail du film.");
+        if (!favBtnImg) {
+          console.error(
+            "Image du bouton favori introuvable dans le détail du film."
+          );
           return;
         }
 
@@ -128,6 +130,16 @@
         });
       };
 
+      C.handlerSearch = async function (event) {
+        let searchTerm = event.target.value;
+        let data = await DataMovie.requestSearch(searchTerm, "age");
+        if (data === undefined || data === 0) {
+          alert("Erreur de chargement des films.");
+          return;
+        }
+        V.renderMoviesList(data);
+      };
+
       // idp est l'id profil et idf est l'id film
       C.handlerFavorite = async function (idf) {
         DataMovie.addFav(C.idProfil, idf);
@@ -141,7 +153,7 @@
           C.ageProfil + " dont l'id est " + C.idProfil
         );
         await C.getFavMovies(id);
-        await C.getMoviesMAV(age); 
+        await C.getMoviesMAV(age);
         await C.getMovies(age); // On charge automatiquement les films du profil
         await C.getMoviesCat("Action", age);
         await C.getMoviesCat("Comedie", age);
@@ -196,7 +208,7 @@
         filmCards.forEach((card) => {
           card.addEventListener("click", () => {
             let movieId = card.getAttribute("data-id");
-            C.handlerDetail(movieId);
+            
           });
         });
       };
@@ -212,14 +224,13 @@
       };
 
       C.getMoviesMAV = async function (age) {
-        let data = await DataMovie.requestMAV(age);
-        if (data === undefined || data === 0) {
+        let data6 = await DataMovie.requestMAV(age);
+        if (data6 === undefined || data6 === 0) {
           alert("Erreur de chargement des films.");
           return;
         }
-        V.renderMoviesMAV(data);
+        V.renderMoviesMAV(data6);
       };
-
 
       C.start = function () {
         V.renderNavBar();
@@ -238,17 +249,8 @@
       // ------ Premet de generer la première liste de tout les films ------ //
 
       V.renderMoviesList = function (obj) {
-        let test = document.querySelector("#Movies__list");
-        test.innerHTML = Movie.formatMany(obj);
-
-        // Add click event listeners to film cards
-        let filmCards = test.querySelectorAll(".film__card");
-        filmCards.forEach((card) => {
-          card.addEventListener("click", () => {
-            let movieId = card.getAttribute("data-id");
-            C.handlerDetail(movieId);
-          });
-        });
+        let container = document.querySelector("#Movies__list");
+        container.innerHTML = Movie.formatMany(obj);
       };
 
       V.renderMoviesMAV = function (obj) {
@@ -260,12 +262,10 @@
         filmCards.forEach((card) => {
           card.addEventListener("click", () => {
             let movieId = card.getAttribute("data-id");
-            C.handlerDetail(movieId);
+            
           });
         });
       };
-
-
 
       V.renderFavMoviesList = async function (obj) {
         console.log("Films utilisés :", obj); // Pour vérifier
@@ -291,7 +291,7 @@
         filmCards.forEach((card) => {
           card.addEventListener("click", () => {
             let movieId = card.getAttribute("data-id");
-            C.handlerDetail(movieId); // Appelle la fonction pour afficher les détails du film
+             // Appelle la fonction pour afficher les détails du film
           });
         });
       };
@@ -308,7 +308,7 @@
         filmCards.forEach((card) => {
           card.addEventListener("click", () => {
             let movieId = card.getAttribute("data-id");
-            C.handlerDetail(movieId);
+            
           });
         });
       };
