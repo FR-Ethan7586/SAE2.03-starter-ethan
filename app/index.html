@@ -13,6 +13,8 @@
     <section id="content">
       <h2 class="title--0">Vos Films Favoris</h2>
       <div class="Movie__list" id="MoviesFav__list"></div>
+      <h2 class="title">Les Films Mis en avant</h2>
+      <div class="Movie__list" id="Movies__MAV"></div>
       <h2 class="title">Tout Nos Films</h2>
       <div class="Movie__list" id="Movies__list"></div>
       <div id="Movie__detail" style="display: none"></div>
@@ -46,6 +48,7 @@
       // Importation des modules
       import { NavBar } from "./component/NavBar/script.js";
       import { Movie } from "./component/Movies_list/script.js";
+      import { MAV } from "./component/Movies_list_MAV/script.js";
       import { MovieCat } from "./component/Movies_list_Cat/script.js";
       import { MovieFav } from "./component/Movies_list_fav/script.js";
       import { MovieDetail } from "./component/MovieDetail/script.js";
@@ -138,7 +141,7 @@
           C.ageProfil + " dont l'id est " + C.idProfil
         );
         await C.getFavMovies(id);
-
+        await C.getMoviesMAV(age); 
         await C.getMovies(age); // On charge automatiquement les films du profil
         await C.getMoviesCat("Action", age);
         await C.getMoviesCat("Comedie", age);
@@ -208,6 +211,16 @@
         let id = data.id;
       };
 
+      C.getMoviesMAV = async function (age) {
+        let data = await DataMovie.requestMAV(age);
+        if (data === undefined || data === 0) {
+          alert("Erreur de chargement des films.");
+          return;
+        }
+        V.renderMoviesMAV(data);
+      };
+
+
       C.start = function () {
         V.renderNavBar();
         C.getProfil();
@@ -237,6 +250,22 @@
           });
         });
       };
+
+      V.renderMoviesMAV = function (obj) {
+        let test = document.querySelector("#Movies__MAV");
+        test.innerHTML = MAV.formatMany(obj);
+
+        // Add click event listeners to film cards
+        let filmCards = test.querySelectorAll(".film__card");
+        filmCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            let movieId = card.getAttribute("data-id");
+            C.handlerDetail(movieId);
+          });
+        });
+      };
+
+
 
       V.renderFavMoviesList = async function (obj) {
         console.log("Films utilisés :", obj); // Pour vérifier

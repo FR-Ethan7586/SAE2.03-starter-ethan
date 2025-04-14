@@ -7,8 +7,8 @@ Movie.format = function (obj) {
   let html = template;
   html = html.replace("{id}", obj.id);
   html = html.replace("{{cover}}", obj.image);
-  html = html.replace("{{film_title}}", obj.name);
-  html = html.replace("{{film_title}}", obj.name);
+  html = html.replace("{{film_title}}", obj.name || "Aucun Film disponible");
+  html = html.replace("{{film_title}}", obj.name || "Aucun Film disponible");
   return html;
 };
 

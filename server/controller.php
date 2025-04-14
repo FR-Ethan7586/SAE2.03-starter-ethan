@@ -130,3 +130,10 @@ function updateFavMovieController()
     return false;
   }
 }
+
+
+function readMoviesMAVController()
+{
+  $film_list_mav = getMovieMAV($_REQUEST['age']);
+  return $film_list_mav;
+}

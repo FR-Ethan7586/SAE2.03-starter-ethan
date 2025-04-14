@@ -254,3 +254,23 @@ function addFavMovie($profil_id, $movie_id) {
         return ["action" => "added"];
     }
 }
+
+
+function getMovieMAV($age)
+{
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL pour récupérer le Movie avec des paramètres
+    $sql = "SELECT Movie.name, Movie.image, Movie.id
+            FROM Movie
+            WHERE Movie.min_age <= :age AND Movie.MAV = 1";
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+
+    $stmt->bindParam(':age', $age);
+    // Exécute la requête SQL
+    $stmt->execute();
+    // Récupère les résultats de la requête sous forme d'objets
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; // Retourne les résultats
+}

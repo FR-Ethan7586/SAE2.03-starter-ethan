@@ -69,6 +69,10 @@ if (isset($_REQUEST['todo'])) {
       $data = readMoviesPerCategorieController();
       break;
 
+      case 'readMoviesMAV':  // Mis En Avant 
+        $data = readMoviesMAVController();
+        break;
+
     case 'readMoviesfav':
       $data = readMoviesFavController();
       break;

@@ -44,6 +44,15 @@ DataMovie.requestMovieWname = async function (name) {
   let data4 = await answer4.json();
   return data4;
 }
+
+
+DataMovie.requestMAV = async function (age) {
+  let answer2 = await fetch(
+    HOST_URL + "SAE2.03-starter-ethan/server/script.php?todo=readMoviesMAV&age=" + age
+  );
+  let data2 = await answer2.json();
+  return data2;
+};
 //---------------------------------------------------------------------------------------------//
 
 DataMovie.addFav = async function (idp, idf) {
