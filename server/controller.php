@@ -137,3 +137,9 @@ function readMoviesMAVController()
   $film_list_mav = getMovieMAV($_REQUEST['age']);
   return $film_list_mav;
 }
+
+function readMoviesSearchController()
+{
+  $film_list_search = getMovieSearch($_REQUEST['input'], $_REQUEST['age']);
+  return $film_list_search;
+}

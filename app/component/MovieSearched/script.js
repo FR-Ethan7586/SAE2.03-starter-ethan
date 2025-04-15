@@ -1,9 +1,9 @@
 let templateFile = await fetch("./component/Movies_list/template.html");
 let template = await templateFile.text();
 
-let Movie = {};
+let Results = {};
 
-Movie.format = function (obj) {
+Results.format = function (obj) {
   let html = template;
   html = html.replace("{id}", obj.id);
   html = html.replace("{{cover}}", obj.image);
@@ -12,12 +12,12 @@ Movie.format = function (obj) {
   return html;
 };
 
-Movie.formatMany = function (Movies) {
+Results.formatMany = function (Movies) {
   let html = "";
   for (const film of Movies) {
-    html += Movie.format(film);
+    html += Results.format(film);
   }
   return html;
 };
 
-export { Movie };
+export { Results };

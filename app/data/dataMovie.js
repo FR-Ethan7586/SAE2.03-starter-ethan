@@ -102,5 +102,13 @@ DataMovie.addFav = async function (idp, idf) {
   }
 };
 
+DataMovie.requestSearch = async function (search, age) {
+  let answer8 = await fetch(
+    HOST_URL + "../../../server/script.php?todo=readMoviesSearch&input=" + search + "&age=" + age
+  );
+  let data8 = await answer8.json();
+  return data8;
+};
+
 export { DataMovie };
 

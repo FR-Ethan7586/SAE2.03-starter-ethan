@@ -17,7 +17,7 @@
       <div class="Movie__list" id="Movies__MAV"></div>
       <h2 class="title">Tout Nos Films</h2>
       <div class="Movie__list" id="Movies__list"></div>
-      <div id="Movie__detail" style="display: none"></div>
+      
       <h2 class="title">Nos Films D'Action</h2>
       <div class="Movie__list" id="Movies__Action"></div>
       <h2 class="title">Nos Films Comique</h2>
@@ -43,6 +43,12 @@
         <div class="Profil__cards" id="Profil__cards"></div>
       </div>
     </section>
+    <div id="Movie__detail" style="display: none"></div>
+    <div class="Results" id="results">
+      <h2 class="title title--results">Resultats de la recherche</h2>
+      <button onclick="C.handlerGoBack()" class="btn-back">Retour</button>
+      <div class="Results__cards" id="Results__cards"></div>
+    </div>
 
     <script type="module">
       // Importation des modules
@@ -55,6 +61,7 @@
       import { DataMovie } from "./data/dataMovie.js";
       import { DataProfil } from "./data/dataProfil.js";
       import { Profil } from "./component/ProfilChoice/script.js";
+      import { Results } from "./component/MovieSearched/script.js";
 
       window.C = {};
 
@@ -131,13 +138,26 @@
       };
 
       C.handlerSearch = async function (event) {
-        let searchTerm = event.target.value;
-        let data = await DataMovie.requestSearch(searchTerm, "age");
-        if (data === undefined || data === 0) {
-          alert("Erreur de chargement des films.");
+        let searchTerm = event.target.value.trim();
+        if (!searchTerm) return;
+
+        let data = await DataMovie.requestSearch(searchTerm, C.ageProfil);
+        if (!data || data.length === 0) {
+          alert("Aucun film trouvé.");
           return;
         }
-        V.renderMoviesList(data);
+
+        // Afficher la "page" de résultats et cacher la principale
+        document.getElementById("content").style.display = "none";
+        document.getElementById("results").style.display = "block";
+
+        // Rendu des films
+        V.renderMoviesSearch(data);
+      };
+
+      C.handlerGoBack = function () {
+        document.getElementById("content").style.display = "block";
+        document.getElementById("results").style.display = "none";
       };
 
       // idp est l'id profil et idf est l'id film
@@ -208,7 +228,6 @@
         filmCards.forEach((card) => {
           card.addEventListener("click", () => {
             let movieId = card.getAttribute("data-id");
-            
           });
         });
       };
@@ -262,7 +281,6 @@
         filmCards.forEach((card) => {
           card.addEventListener("click", () => {
             let movieId = card.getAttribute("data-id");
-            
           });
         });
       };
@@ -291,7 +309,7 @@
         filmCards.forEach((card) => {
           card.addEventListener("click", () => {
             let movieId = card.getAttribute("data-id");
-             // Appelle la fonction pour afficher les détails du film
+            // Appelle la fonction pour afficher les détails du film
           });
         });
       };
@@ -308,7 +326,6 @@
         filmCards.forEach((card) => {
           card.addEventListener("click", () => {
             let movieId = card.getAttribute("data-id");
-            
           });
         });
       };
@@ -325,6 +342,11 @@
             // C.handlerProfil(ProfileId);
           });
         });
+      };
+
+      V.renderMoviesSearch = function (obj) {
+        let container = document.querySelector("#Results__cards");
+        container.innerHTML = Results.formatMany(obj);
       };
 
       //  Ces lignes au dessous servent a l'itération 3. Elles font apparaitre et disparaitre les détails du film
