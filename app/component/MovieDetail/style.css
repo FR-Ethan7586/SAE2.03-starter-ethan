@@ -1,4 +1,4 @@
-#Movie__detail {
+.Movie__detail {
   position: absolute;
   z-index: 50;
   top: 50%;
@@ -75,7 +75,7 @@
 }
 
 @media (min-width: 570px) {
-  #Movie__detail {
+  .Movie__detail {
     width: 30rem;
     padding: 2rem;
   }
@@ -91,7 +91,7 @@
 }
 
 @media (min-width: 1200px) {
-  #Movie__detail {
+  .Movie__detail {
     width: 45rem;
     padding: 2rem;
   }

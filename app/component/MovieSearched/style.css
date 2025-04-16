@@ -1,11 +1,33 @@
+.Results{
+    display: none;
+}
+
+.Results__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding-top: 8rem;
+}
 
 .title--results{
-    padding-top: 8rem;
+    margin: 0;
 }
 
 .btn-back {
     margin: 1rem;
     padding: 0.5rem 1rem;
     font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 150px;
+    background-color: var(--color-bg-card);
     cursor: pointer;
   }
+
+.Results__cards{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}

@@ -1,4 +1,4 @@
-#addMovie {
+.addMovie {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -70,7 +70,7 @@
 }
 
 @media (max-width: 768px) {
-  #addMovie {
+  .addMovie {
     width: 20rem;
   }
 

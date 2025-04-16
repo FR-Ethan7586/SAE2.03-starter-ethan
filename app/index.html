@@ -17,7 +17,7 @@
       <div class="Movie__list" id="Movies__MAV"></div>
       <h2 class="title">Tout Nos Films</h2>
       <div class="Movie__list" id="Movies__list"></div>
-      
+
       <h2 class="title">Nos Films D'Action</h2>
       <div class="Movie__list" id="Movies__Action"></div>
       <h2 class="title">Nos Films Comique</h2>
@@ -43,10 +43,12 @@
         <div class="Profil__cards" id="Profil__cards"></div>
       </div>
     </section>
-    <div id="Movie__detail" style="display: none"></div>
+    <div class="Movie__detail" id="Movie__detail" style="display: none"></div>
     <div class="Results" id="results">
-      <h2 class="title title--results">Resultats de la recherche</h2>
-      <button onclick="C.handlerGoBack()" class="btn-back">Retour</button>
+      <header class="Results__header">
+        <h2 class="title title--results">Resultats de la recherche</h2>
+        <button onclick="C.handlerGoBack()" class="btn-back">Retour</button>
+      </header>
       <div class="Results__cards" id="Results__cards"></div>
     </div>
 
@@ -136,6 +138,8 @@
           }
         });
       };
+
+
 
       C.handlerSearch = async function (event) {
         let searchTerm = event.target.value.trim();
@@ -377,7 +381,6 @@
           profilDiv.style.display = "none";
         }
       });
-
       C.start(); // Démarre l'application
     </script>
   </body>
