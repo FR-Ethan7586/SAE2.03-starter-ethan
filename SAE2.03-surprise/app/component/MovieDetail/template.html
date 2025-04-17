@@ -1,0 +1,33 @@
+<div class="movie__info">
+  <header class="movie__info__header">
+    <h2 class="movie__info__title" data-id="{{nom_film}}">{{nom_film}}</h2>
+    <button class="movie__info__favorite" onclick="C.handlerFavorite({idfilm})">
+      <img class="movie__info__fav-icon" src="./images/icons/add_fav_blanc.webp" alt="Ajouter un favoris">
+    </button>
+  </header>
+    <figure class="movie__info__figure">
+      <img
+        class="movie__info__cover"
+        src="./images/{{cover}}"
+        alt="Cover du film {{nom_film}}"
+      />
+      <ul class="movie__info__list">
+        <li class="movie__info__list__item movie__info__list__item--1">{{date}}</li>
+        <li class="movie__info__list__item movie__info__list__item--2">{{realisateur}}</li>
+        <li class="movie__info__list__item movie__info__list__item--3">{{category}}</li>
+        <li class="movie__info__list__item movie__info__list__item--4">+{{age}}</li>
+      </ul>
+      <figcaption class="cover__figcaption">{{description}}</figcaption>
+    </figure>
+</div>
+<div class="movie__info__trailer__container">
+  <iframe
+    class="movie__info__trailer"
+    src="{{trailer}}"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+</div>

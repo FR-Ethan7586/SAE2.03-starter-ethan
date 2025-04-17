@@ -1,0 +1,95 @@
+.Movie__list {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    scrollbar-width: 0;
+    scrollbar-color: transparent transparent;
+}
+
+
+.film__card{
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    flex-direction: column;
+    width: 12rem;
+    height: 18rem;
+    overflow: hidden;
+    color: var(--color-fg);
+}
+
+.film__cover{
+    height: 18rem;
+    width: 12rem;
+}
+
+.film__caption{
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.film__title{
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: var(--ff-sans);
+}
+
+.carousel__btn{
+    display: none;
+}
+
+/* -----------padding pour ne pas apparaitre sous la navbar-------------------- */
+
+.title--0{
+    padding-top: 6rem;
+}
+
+@media (min-width: 780px) {
+    .Movie__list {
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+    .carousel__container{
+        position: relative;
+    }
+    .carousel__container:hover{
+        .carousel__btn{
+            display: block;
+        }
+    }
+
+    .carousel__btn {
+        display: none;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--color-bg-btn-carousel--hover);
+        
+        border: none;
+        font-size: 2rem;
+        padding: 1rem 1rem;
+        cursor: pointer;
+        z-index: 1;
+      }
+
+      .carousel__btn:hover {
+        background: var(--color-bg-btn-carousel);
+      }  
+
+    .carousel__btn--G {
+        left: 0;
+    }
+    .carousel__btn--D {
+        right: 0;
+    }
+    .carousel__btn__arr{
+        height: 1rem;
+        aspect-ratio: 1/1;
+      }
+}

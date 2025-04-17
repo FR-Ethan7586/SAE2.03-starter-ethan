@@ -1,0 +1,417 @@
+<!DOCTYPE html lang="fr">
+<html lang="fr">
+  <head>
+    <title>SAE2.03 APP</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/base.css" />
+  </head>
+
+  <body>
+    <header id="header"></header>
+
+    <section id="content">
+      <h2 class="title title--0">Vos Films Favoris</h2>
+      <div class="Movie__list" id="MoviesFav__list"></div>
+      <h2 class="title">Les Films Mis en avant</h2>
+      <div class="Movie__list" id="Movies__MAV"></div>
+      <h2 class="title">Tout Nos Films</h2>
+      <div class="carousel__container">
+        <button class="carousel__btn carousel__btn--G" onclick="C.handlerCarrG()""><img class="carousel__btn__arr" src="./images/icons/fleche-gauche.png" alt="Fleche Gauche"></button>
+        <div class="Movie__list" id="Movies__list"></div>
+        <button class="carousel__btn carousel__btn--D" onclick="C.handlerCarrD()"><img class="carousel__btn__arr" src="./images/icons/fleche-droite.png" alt="Fleche Droite"></button>
+      </div>
+      <h2 class="title">Nos Films D'Action</h2>
+      <div class="Movie__list" id="Movies__Action"></div>
+      <h2 class="title">Nos Films Comique</h2>
+      <div class="Movie__list" id="Movies__Comedie"></div>
+      <h2 class="title">Nos Films Dramatique</h2>
+      <div class="Movie__list" id="Movies__Drame"></div>
+      <h2 class="title">Nos Films De Science-fiction</h2>
+      <div class="Movie__list" id="Movies__Science-fiction"></div>
+      <h2 class="title">Nos Films D'Animation</h2>
+      <div class="Movie__list" id="Movies__Animation"></div>
+      <h2 class="title">Nos Thriller</h2>
+      <div class="Movie__list" id="Movies__Thriller"></div>
+      <h2 class="title">Nos Films D'Horreur</h2>
+      <div class="Movie__list" id="Movies__Horreur"></div>
+      <h2 class="title">Nos Films D'Aventure</h2>
+      <div class="Movie__list" id="Movies__Aventure"></div>
+      <h2 class="title">Nos Films Fantaisiste</h2>
+      <div class="Movie__list" id="Movies__Fantaisie"></div>
+      <h2 class="title">Nos Documentaire</h2>
+      <div class="Movie__list" id="Movies__Documentaire"></div>
+      <div class="Profil__choice" id="Profil__choice">
+        <h2 class="Profil__choice__title">Choisissez votre Profil</h2>
+        <div class="Profil__cards" id="Profil__cards"></div>
+      </div>
+    </section>
+    <div class="Movie__detail" id="Movie__detail" style="display: none"></div>
+    <div class="Results" id="results">
+      <header class="Results__header">
+        <h2 class="title title--results">Resultats de la recherche</h2>
+        <button onclick="C.handlerGoBack()" class="btn-back">Retour</button>
+      </header>
+      <div class="Results__cards" id="Results__cards"></div>
+    </div>
+
+    <script type="module">
+      // Importation des modules
+      import { NavBar } from "./component/NavBar/script.js";
+      import { Movie } from "./component/Movies_list/script.js";
+      import { MAV } from "./component/Movies_list_MAV/script.js";
+      import { MovieCat } from "./component/Movies_list_Cat/script.js";
+      import { MovieFav } from "./component/Movies_list_fav/script.js";
+      import { MovieDetail } from "./component/MovieDetail/script.js";
+      import { DataMovie } from "./data/dataMovie.js";
+      import { DataProfil } from "./data/dataProfil.js";
+      import { Profil } from "./component/ProfilChoice/script.js";
+      import { Results } from "./component/MovieSearched/script.js";
+
+      window.C = {};
+
+      C.handlerAbout = function () {
+        alert(
+          "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
+        );
+      };
+
+
+      C.handlerDropdown = function () {
+        let menu = document.getElementById("dropdown__menu");
+        if (menu.style.display === "none" || menu.style.display === "") {
+          menu.style.display = "flex";
+        } else {
+          menu.style.display = "none";
+        }
+      };
+
+      C.closeDropdown = function () {
+        let menu = document.getElementById("dropdown__menu");
+        menu.style.display = "none";
+      };
+
+      // sert a recuperer les details du film
+      C.handlerDetail = async function (id) {
+        let data = await DataMovie.requestMovieDetails(id);
+        if (!data || data.length === 0) {
+          alert("Erreur de chargement des détails du film.");
+          return;
+        }
+
+        const movie = data[0];
+        console.log("Film reçu :", movie);
+
+        // Affichage du détail
+        let detailDiv = document.querySelector("#Movie__detail");
+        detailDiv.innerHTML = MovieDetail.format(movie);
+        detailDiv.style.display = "block";
+
+        // Mise à jour du bouton favori selon que le film est déjà un favori
+        let favBtnImg = detailDiv.querySelector(".movie__info__fav-icon");
+        if (!favBtnImg) {
+          console.error(
+            "Image du bouton favori introuvable dans le détail du film."
+          );
+          return;
+        }
+
+        console.log("Nom du film :", movie.name);
+
+        const isFav = C.favNames.includes(movie.name); // Assure-toi que `movie.name` correspond au nom dans favNames
+
+        // Si déjà favori, on affiche l'icône de suppression, sinon ajout
+        if (isFav) {
+          favBtnImg.src = "./images/icons/remove_fav_blanc.png";
+          favBtnImg.alt = "Retirer des favoris";
+          console.log("Le film est déjà dans les favoris.");
+        } else {
+          favBtnImg.src = "./images/icons/add_fav_blanc.png";
+          favBtnImg.alt = "Ajouter aux favoris";
+          console.log("Le film n'est pas dans les favoris.");
+        }
+
+        // Gérer le clic sur le bouton favori
+        let favBtn = detailDiv.querySelector(".movie__info__favorite");
+        favBtn.addEventListener("click", async () => {
+          // On met d'abord à jour l'icône avant de faire la requête au backend
+          if (C.favNames.includes(movie.name)) {
+            // Le film est déjà favori, on le retire
+            favBtnImg.src = "./images/icons/add_fav_blanc.png";
+            favBtnImg.alt = "Ajouter aux favoris";
+            C.favNames = C.favNames.filter((n) => n !== movie.name); // Retirer le film des favoris
+          } else {
+            // Le film n'est pas encore favori, on l'ajoute
+            favBtnImg.src = "./images/icons/remove_fav_blanc.png";
+            favBtnImg.alt = "Retirer des favoris";
+            C.favNames.push(movie.name); // Ajouter le film aux favoris
+          }
+
+          // Appel à la fonction de backend pour ajouter ou retirer le favori
+          let result = await DataMovie.addFav(C.idProfil, movie.id);
+
+          if (result.action === "added") {
+           console.log("Film ajouté aux favoris");
+          } else if (result.action === "removed") {
+            console.log("Film retiré des favoris");
+          }
+        });
+      };
+
+      C.handlerSearch = async function (event) {
+        let searchTerm = event.target.value.trim();
+        if (!searchTerm) return;
+
+        let data = await DataMovie.requestSearch(searchTerm, C.ageProfil);
+        if (!data || data.length === 0) {
+          alert("Aucun film trouvé.");
+          return;
+        }
+
+        // Afficher la "page" de résultats et cacher la principale
+        document.getElementById("content").style.display = "none";
+        document.getElementById("results").style.display = "block";
+
+        // Rendu des films
+        V.renderMoviesSearch(data);
+      };
+
+      C.handlerGoBack = function () {
+        document.getElementById("content").style.display = "block";
+        document.getElementById("results").style.display = "none";
+      };
+
+      // idp est l'id profil et idf est l'id film
+      C.handlerFavorite = async function (idf) {
+        DataMovie.addFav(C.idProfil, idf);
+      };
+
+      C.handlerProfil = async function (age, id) {
+        C.ageProfil = age;
+        C.idProfil = id;
+        console.log(
+          "Âge du profil sélectionné :",
+          C.ageProfil + " dont l'id est " + C.idProfil
+        );
+        await C.getFavMovies(id);
+        await C.getMoviesMAV(age);
+        await C.getMovies(age); // On charge automatiquement les films du profil
+        await C.getMoviesCat("Action", age);
+        await C.getMoviesCat("Comedie", age);
+        await C.getMoviesCat("Drame", age);
+        await C.getMoviesCat("Science-fiction", age);
+        await C.getMoviesCat("Animation", age);
+        await C.getMoviesCat("Thriller", age);
+        await C.getMoviesCat("Horreur", age);
+        await C.getMoviesCat("Aventure", age);
+        await C.getMoviesCat("Fantaisie", age);
+        await C.getMoviesCat("Documentaire", age);
+        return age;
+      };
+
+      C.getFavMovies = async function (id) {
+        // On récupère l’âge stocké par handlerProfil
+        let data = await DataMovie.requestFav(id);
+
+        if (data === undefined || data === 0) {
+          alert("Erreur de chargement des films.");
+        }
+
+        C.favNames = data.map((movie) => movie.movie_name); // on m'as gentillement explique map :)
+        console.log("Nom des Films en favoris dans C.favMovies :", C.favMovies);
+        console.log("Film reçu :", data);
+        // Pour vérifier
+
+        V.renderFavMoviesList(data);
+      };
+
+      C.getMovies = async function (age) {
+        // On récupère l’âge stocké par handlerProfil
+        let data = await DataMovie.request(age);
+
+        if (data === undefined || data === 0) {
+          alert("Erreur de chargement des films.");
+          return;
+        }
+
+        V.renderMoviesList(data);
+      };
+      // ← important
+
+      // ------ Itération 4 ------ //
+
+      C.getMoviesCat = async function (category, age) {
+        let data2 = await DataMovie.requestCat(category, age);
+        let categoryContainer = document.querySelector("#Movies__" + category);
+        categoryContainer.innerHTML = MovieCat.formatMany(data2);
+        // Add click event listeners to category film cards
+        let filmCards = categoryContainer.querySelectorAll(".film__card__cat");
+        filmCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            let movieId = card.getAttribute("data-id");
+          });
+        });
+      };
+
+      C.getProfil = async function () {
+        let data = await DataProfil.request();
+        if (data === undefined || data === 0) {
+          alert("Erreur de chargement du profil.");
+          return;
+        }
+        V.renderProfilChoice(data);
+        let id = data.id;
+      };
+
+      C.getMoviesMAV = async function (age) {
+        let data6 = await DataMovie.requestMAV(age);
+        if (data6 === undefined || data6 === 0) {
+          alert("Erreur de chargement des films.");
+          return;
+        }
+        V.renderMoviesMAV(data6);
+      };
+
+      C.handlerCarrG = function () {
+        let carousel = document.querySelector("#Movies__list");
+        let scrollAmount = carousel.offsetWidth; // largeur visible du carrousel
+        carousel.scrollLeft -= scrollAmount;
+      };
+
+      C.handlerCarrD = function () {
+        let carousel = document.querySelector("#Movies__list");
+        let scrollAmount = carousel.offsetWidth; // largeur visible du carrousel
+        carousel.scrollLeft += scrollAmount;
+      };
+
+
+      C.start = function () {
+        V.renderNavBar();
+        C.getProfil();
+      };
+
+      // -------------------------------------------------------------------------------------//
+
+      window.V = {};
+
+      V.renderNavBar = function (hAbout) {
+        let header = document.querySelector("#header");
+        header.innerHTML = NavBar.format(hAbout);
+      };
+
+      // ------ Premet de generer la première liste de tout les films ------ //
+
+      V.renderMoviesList = function (obj) {
+        let container = document.querySelector("#Movies__list");
+        container.innerHTML = Movie.formatMany(obj);
+      };
+
+      V.renderMoviesMAV = function (obj) {
+        let test = document.querySelector("#Movies__MAV");
+        test.innerHTML = MAV.formatMany(obj);
+
+        // Add click event listeners to film cards
+        let filmCards = test.querySelectorAll(".film__card");
+        filmCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            let movieId = card.getAttribute("data-id");
+          });
+        });
+      };
+
+      V.renderFavMoviesList = async function (obj) {
+        console.log("Films utilisés :", obj); // Pour vérifier
+
+        // On prépare un tableau pour stocker tous les films récupérés
+        let allMoviesData = [];
+
+        // On boucle sur chaque élément du tableau obj
+        for (let film of obj) {
+          let movieName = film.movie_name; // On récupère le nom du film
+          let movieData = await DataMovie.requestMovieWname(movieName); // Récupère les données du film
+          if (movieData) {
+            allMoviesData.push(movieData); // On ajoute le film récupéré au tableau
+          }
+        }
+
+        // Maintenant qu'on a tous les films, on les affiche dans la page
+        let test = document.querySelector("#MoviesFav__list");
+        test.innerHTML = MovieFav.formatMany(allMoviesData); // Affiche les films récupérés
+
+        // Ajouter des écouteurs d'événements aux cartes de films
+        let filmCards = test.querySelectorAll(".film__card");
+        filmCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            let movieId = card.getAttribute("data-id");
+            // Appelle la fonction pour afficher les détails du film
+          });
+        });
+      };
+
+      // ------ Itération 4 ------ //
+      // ------ Premet de generer la liste de certaine catégorie ------ //
+
+      V.renderMoviesListCat = function (obj) {
+        let test = document.querySelector("#Movies__Action");
+        test.innerHTML = MovieCat.formatMany(obj);
+
+        // Add click event listeners to film cards
+        let filmCards = test.querySelectorAll(".film__card__cat");
+        filmCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            let movieId = card.getAttribute("data-id");
+          });
+        });
+      };
+
+      V.renderProfilChoice = function (obj) {
+        let test = document.querySelector("#Profil__cards");
+        test.innerHTML = Profil.formatMany(obj);
+
+        // Add click event listeners to Profiles cards
+        let Profils = test.querySelectorAll(".Profile");
+        Profils.forEach((card) => {
+          card.addEventListener("click", () => {
+            // let ProfileId = card.getAttribute("data-id");
+            // C.handlerProfil(ProfileId);
+          });
+        });
+      };
+
+      V.renderMoviesSearch = function (obj) {
+        let container = document.querySelector("#Results__cards");
+        container.innerHTML = Results.formatMany(obj);
+      };
+
+      //  Ces lignes au dessous servent a l'itération 3. Elles font apparaitre et disparaitre les détails du film
+
+      // Hide #Movie__detail quand on clique au dehors
+      document.addEventListener("click", (event) => {
+        let detailDiv = document.querySelector("#Movie__detail");
+        if (
+          !detailDiv.contains(event.target) &&
+          !event.target.classList.contains("film__card")
+        ) {
+          detailDiv.style.display = "none";
+        }
+      });
+
+      // Pour les Profils
+      document.addEventListener("click", (event) => {
+        let profilDiv = document.querySelector("#Profil__choice");
+        if (
+          event.target.classList.contains("Profile") ||
+          event.target.classList.contains("profile__img") ||
+          event.target.classList.contains("profile__name")
+        ) {
+          let profileCard = event.target.closest(".Profile");
+          if (profileCard) {
+            let profileId = profileCard.getAttribute("data-id");
+          }
+          profilDiv.style.display = "none";
+        }
+      });
+      C.start(); // Démarre l'application
+    </script>
+  </body>
+</html>

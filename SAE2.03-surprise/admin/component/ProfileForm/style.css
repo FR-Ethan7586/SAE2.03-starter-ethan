@@ -1,0 +1,92 @@
+.addProfil {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 50rem;
+    padding: 1rem;
+    font-family: var(--ff-sans);
+    background-color: var(--color-bg-form);
+    border-radius: 15px;
+  }
+  
+  .addProfil__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 1.5rem;
+  }
+  
+  .addProfil-section1,
+  .addProfil-section2 {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .addProfil__title {
+    font-size: 2rem;
+    text-align: center;
+    color: var(--color-fg);
+  }
+  
+  .addProfil__input {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: none;
+  }
+  
+  .addProfil__input--small {
+    width: 20rem;
+  }
+  
+  .addProfil__input--description {
+    height: 5rem;
+    resize: none;
+    border-radius: 5px;
+  }
+  
+  .addProfil__button {
+    align-self: center;
+    width: 25rem;
+    padding: 1rem 1rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: black;
+    background-color: var(--color-bg-button);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .addProfil__button:hover {
+    color: var(--color-fg);
+    background-color: var(--color-bg-button-hover);
+    transform: scale(1.05);
+  }
+  
+  .addProfil__button:active {
+    transform: scale(0.9);
+    transition: transform 0.1s ease;
+  }
+  
+  @media (max-width: 768px) {
+    .addProfil {
+      width: 20rem;
+    }
+  
+    .addProfil__title{
+      margin-block: 1rem;
+    }
+    .addProfil-section1,
+    .addProfil-section2 {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .addProfil__input--small {
+      width: 15rem;
+    }
+    .addProfil__button {
+      width: 15rem;
+    }
+  } 
+  

@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+:root {
+  /* Primitive Tokens */
+  --color-black: #000000;
+  --color-black-transparent: #000000cd;
+  --color-white: hsl(0, 0%, 100%);
+  --color-gray-light: hsl(0, 0%, 80%);
+  --color-gray: hsl(0, 0%, 50%);
+  --color-gray-dark: hsl(0, 0%, 20%);
+  --ff-sans: "Plus Jakarta Sans", sans-serif;
+  --color-light-yellow: #F8FCDA;
+  --color-ultra-violet: #5D5D81;
+  --color-space-cadet: #3B3355;
+  --color-thistle: #C6B9CD;
+  --color-columbia-blue: #AFD2E9;
+  --color-onyx: #3A3A4B;
+  --color-dark-red: #900E0E;
+  --color-yellow: #F5EB05;
+  --color-yellow--transparent: #f5e9054e;
+
+  /* Sementic Tokens */
+  --color-fg: var(--color-white);
+  --color-bg-nav: var(--color-black-transparent);
+  --color-bg-card: var(--color-light-yellow);
+  --color-bg-detail: var(--color-onyx);
+  --color-bg-profil: var(--color-black);
+  --color-bg: var(--color-black);
+  --color-text: var(--color-white);
+  --color-border-profil: var(--color-black);
+  --color-bg-fav: var(--color-dark-red);
+  --color-bg-btn-carousel: var(--color-yellow);
+  --color-bg-btn-carousel--hover: var(--color-yellow--transparent);
+}

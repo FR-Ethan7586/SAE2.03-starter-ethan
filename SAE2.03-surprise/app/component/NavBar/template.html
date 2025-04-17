@@ -1,0 +1,63 @@
+<nav class="navbar font-sans">
+  <a class="navbar__logo--a" href="#">
+    <img
+      class="navbar__logo"
+      src="./images/icons/M6+Blanc.png"
+      alt="Logo du site web"
+    />
+  </a>
+  <div class="navbar__search--form" id="search__form">
+    <input
+      type="text"
+      class="navbar__search"
+      id="search"
+      placeholder="Rechercher un film"
+      onchange="C.handlerSearch(event)"
+    />
+  </div>
+  <div class="main-nav">
+    <ul class="main-nav__list">
+      <li class="main-nav__item">
+        <a href="#" class="navbar__item navbar__item--accueil">Accueil</a>
+      </li>
+      <li class="main-nav__item dropdown">
+        <a onclick="C.handlerDropdown()" id="dropdown__toggle" class="navbar__item">Catégories</a>
+      </li>
+      <li class="main-nav__item">
+        <a class="navbar__item" href="https://mmi.unilim.fr/~lochis1/SAE2.03_Surprise/app/">Se déconnecter</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<ul id="dropdown__menu" class="dropdown__menu">
+  <li onclick="C.closeDropdown()" class="dropdown__item">
+    <a href="#Movies__Action" class="navbar__item">Action</a>
+  </li>
+  <li onclick="C.closeDropdown()" class="dropdown__item">
+    <a href="#Movies__Comedie" class="navbar__item">Comédies</a>
+  </li>
+  <li onclick="C.closeDropdown()" class="dropdown__item">
+    <a href="#Movies__Drame" class="navbar__item">Drames</a>
+  </li>
+  <li onclick="C.closeDropdown()"  class="dropdown__item">
+    <a href="#Movies__Science-fiction" class="navbar__item">Science-fiction</a>
+  </li>
+  <li onclick="C.closeDropdown()" class="dropdown__item">
+    <a href="#Movies__Animation" class="navbar__item">Films d'Animation</a>
+  </li>
+  <li onclick="C.closeDropdown()" class="dropdown__item">
+    <a href="#Movies__Thriller" class="navbar__item">Thrillers</a>
+  </li>
+  <li onclick="C.closeDropdown()" class="dropdown__item">
+    <a href="#Movies__Horreur" class="navbar__item">Films d'Horreur</a>
+  </li>
+  <li onclick="C.closeDropdown()" class="dropdown__item">
+    <a href="#Movies__Aventure" class="navbar__item">Films d'Aventure</a>
+  </li>
+  <li onclick="C.closeDropdown()" class="dropdown__item">
+    <a href="#Movies__Fantaisie" class="navbar__item">Films Fantastique</a>
+  </li>
+  <li onclick="C.closeDropdown()" class="dropdown__item">
+    <a href="#Movies__Documentaire" class="navbar__item">Documentaires</a>
+  </li>
+</ul>

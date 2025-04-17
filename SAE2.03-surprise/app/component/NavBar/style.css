@@ -1,0 +1,156 @@
+html {
+  scroll-padding-top: 10rem;
+  scroll-behavior: smooth;
+}
+
+/* NAVBAR GLOBALE */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  font-weight: 900;
+  color: var(--color-fg);
+  background-color: var(--color-bg-nav);
+}
+
+/* LOGO */
+.navbar__logo,
+.navbar__logo--a,
+.navbar__logo--link {
+  height: 2.5rem;
+  aspect-ratio: 16/9;
+  flex-shrink: 0;
+}
+
+/* BARRE DE RECHERCHE */
+.navbar__search--form {
+  margin: 0 1rem;
+}
+
+.navbar__search {
+display: none;
+}
+
+@media (min-width: 730px) {
+  .navbar__search {
+    display: block;
+    width: 18rem;
+    margin: 0 2rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 50px;
+    border: none;
+  }
+}
+
+@media (min-width: 1080px) {
+  .navbar__search {
+    width: 28rem;
+  }
+}
+
+/* LISTE DES LIENS NAVIGATION PRINCIPALE */
+.navbar__list {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.navbar__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+  padding: 1rem;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: 5px;
+  color: var(--color-fg);
+  transition: all 0.25s ease-in-out;
+}
+
+.navbar__item:hover {
+  background-color: rgba(255, 255, 255, 0.525);
+}
+
+/* MENU DÉROULANT */
+.dropdown__toggle {
+  cursor: pointer;
+}
+
+.dropdown__menu {
+  display: none;
+  position: fixed;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  top: 5.49rem;
+  left: 0;
+  width: 100vw;
+  background-color: var(--color-bg-nav);
+  padding: 1rem;
+  z-index: 1000;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: aliceblue;
+}
+
+.dropdown__item {
+  padding: 1rem;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--color-fg);
+}
+
+/* LIENS */
+li {
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+
+/* NAVIGATION PRINCIPALE */
+.main-nav {
+  position: relative;
+  justify-content: center;
+  margin-left: -2rem;
+  padding: 0;
+  inset: 0;
+  background-color: transparent;
+  translate: 0%;
+}
+
+.main-nav__list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  text-align: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar__item--accueil{
+  display: none;
+}
+
+@media (min-width: 800px) {
+  .main-nav {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 730px){
+  .navbar__item--accueil{
+    display: flex;
+  }
+}

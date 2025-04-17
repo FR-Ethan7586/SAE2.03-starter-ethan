@@ -1,0 +1,61 @@
+.Movie__list {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    scrollbar-width: 0;
+    scrollbar-color: transparent transparent;
+  
+  }
+
+  .title {
+    margin-top: .5rem;
+    margin: 3rem 0 1rem 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: var(--ff-sans);
+    color: var(--color-text);
+  }
+  
+  .film__card {
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    flex-direction: column;
+    margin-inline: 0.25rem;
+    width: 12rem;
+    height: 18rem;
+  }
+  
+  .film__cover {
+    height: 18rem;
+    width: 12rem;
+    transition: all 0.4s ease-in-out;
+  }
+  .film__cover:hover {
+    scale: 1.05;
+  }
+
+
+  .film__caption {
+    margin-top: .5rem;
+    text-align: center;
+  }
+  
+  .film__title {
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: var(--ff-sans);
+  }
+
+  @media (min-width: 780px) {
+    .Movie__list {
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+}

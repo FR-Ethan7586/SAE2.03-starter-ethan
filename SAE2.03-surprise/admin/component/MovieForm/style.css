@@ -1,0 +1,91 @@
+.addMovie {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 50rem;
+  padding: 1rem;
+  font-family: var(--ff-sans);
+  background-color: var(--color-bg-form);
+  border-radius: 15px;
+}
+
+.addMovie__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0 1.5rem;
+}
+
+.addMovie-section1,
+.addMovie-section2 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.addMovie__title {
+  font-size: 2rem;
+  text-align: center;
+  color: var(--color-fg);
+}
+
+.addMovie__input {
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  border: none;
+}
+
+.addMovie__input--small {
+  width: 20rem;
+}
+
+.addMovie__input--description {
+  height: 5rem;
+  resize: none;
+  border-radius: 5px;
+}
+
+.addMovie__button {
+  align-self: center;
+  width: 25rem;
+  padding: 1rem 1rem;
+  border-radius: 50px;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: black;
+  background-color: var(--color-bg-button);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.addMovie__button:hover {
+  color: var(--color-fg);
+  background-color: var(--color-bg-button-hover);
+  transform: scale(1.05);
+}
+
+.addMovie__button:active {
+  transform: scale(0.9);
+  transition: transform 0.1s ease;
+}
+
+@media (max-width: 768px) {
+  .addMovie {
+    width: 20rem;
+  }
+
+  .addMovie__title{
+    margin-block: 1rem;
+  }
+  .addMovie-section1,
+  .addMovie-section2 {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .addMovie__input--small {
+    width: 15rem;
+  }
+  .addMovie__button {
+    width: 15rem;
+  }
+} 

@@ -1,0 +1,22 @@
+@layer reset, variables, components, utilities;
+
+@import "./reset.css" layer(reset);
+@import "./variables.css" layer(variables);
+@import "./utilities.css" layer(utilities);
+
+@import "../component/Movies_list/style.css" layer(components);
+@import "../component/Movies_list_Cat/style.css" layer(components);
+@import "../component/Movies_list_fav/style.css" layer(components);
+@import "../component/NavBar/style.css" layer(components);
+@import "../component/MovieDetail/style.css" layer(components);
+@import "../component/ProfilChoice/style.css" layer(components);
+@import "../component/MovieSearched/style.css" layer(components);
+
+body{
+    background-color: var(--color-bg);
+    font-family: var(--ff-sans);
+}
+
+.content{
+    background-color: var(--color-bg);
+}

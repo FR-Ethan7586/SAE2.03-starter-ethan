@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>SAE2.03 ADMIN</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/base.css" />
+  </head>
+  <body>
+    <h1 class="admin__title">Bienvenue dans le back office !</h1>
+    <section id="log"></section>
+    <section class="addMovie" id="addMovie"></section>
+    <div class="Profil">
+      <section class="addProfil" id="addProfil"></section>
+      <section id="modifyProfil"></section>
+    </div>
+
+    <script type="module">
+      import { Log } from "./component/Log/script.js";
+      import { DataMovie } from "./data/dataMovie.js";
+      import { DataProfil } from "./data/dataProfil.js";
+      import { ProfilForm } from "./component/ProfileForm/script.js";
+      import { MovieForm } from "./component/MovieForm/script.js";
+
+      window.C = {};
+
+      C.start = function () {
+        V.renderLog("Démarrage de l'application");
+        V.renderMovie("C.handlerUpdate()");
+        V.renderProfil("C.handlerAddProfil()");
+      };
+
+      C.handlerUpdate = async function () {
+        let form = document.querySelector(".addMovie__form");
+        let fd = new FormData(form);
+        // Attend la réponse de la fonction `DataMenu.update(fd)`
+        let res = await DataMovie.add(fd);
+        // Affiche le résultat de la mise à jour dans le journal
+        V.renderLog(res);
+      };
+
+      C.handlerAddProfil = async function () {
+        let form2 = document.querySelector(".addProfil__form");
+        let fd2 = new FormData(form2);
+        // Attend la réponse de la fonction `DataMenu.update(fd)`
+        let res2 = await DataProfil.add(fd2);
+        // Affiche le résultat de la mise à jour dans le journal
+        V.renderLog(res2);
+      };
+
+      window.V = {};
+
+      V.renderLog = function (txt) {
+        let content = document.querySelector("#log");
+        content.innerHTML = Log.format(txt);
+      };
+
+      V.renderMovie = function (handler) {
+        let content = document.querySelector("#addMovie");
+        content.innerHTML = MovieForm.format(handler);
+      };
+      V.renderProfil = function (handler) {
+        let content = document.querySelector("#addProfil");
+        content.innerHTML = ProfilForm.format(handler);
+      };
+
+      C.start();
+    </script>
+  </body>
+</html>
